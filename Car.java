@@ -1,3 +1,5 @@
+//Author WD
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,7 +45,7 @@ public class Car extends GamePiece {
         //Complex Car Parts
         this.engine = new Motor();
         this.wheel = new Steering();
-        this.wheel.saveDisplay("|" + carNum + "|");
+        this.wheel.setDisplay(carNum);
     }
 
     //Parameter free constructor to complete the class
@@ -94,5 +96,155 @@ public class Car extends GamePiece {
         }
         return false;
     }
+
+    private int getXDiff(){
+        int reply = this.getX() - this.map.get(0).getX();
+        return reply;
+    }
+
+    private int getYDiff(){
+        int reply = this.getY() - this.map.get(0).getY();
+        return reply;
+    }
+
+
+
+//--------------------------------------Public Methods-------------------------------------------
+//--------------------------------------Setters, then Getters---------------------------
+
+    public void setDestination(List<Destination> map){
+        this.map.addAll(map);
+    }
+
+    public void setPrev(Car past){
+        this.prevSpot = past;
+    }
+
+    public boolean getFinished(){
+        return this.finished;
+    }
+
+    public String getResults(){
+        String reply = "Racer: "+ this.getCarNum() + " finished in " + this.getTurns() + " turns";
+        return reply;
+    }
+
+    public String getCarNum(){
+        return this.carNum;
+    }
+
+//-------------------------Exotic Public Methods---------------------------------------------
+
+        //Checks to see if the Car has made it to the Destination
+    public boolean gotThere(){
+        if(this.getX() == this.map.get(0).getX()){
+            if(this.map.get(0).getY() == this.getY()){
+
+
+                this.getNextDestination();
+                return true;
+            }
+        }
+        return false;
+    }
+
+        //used if vehicle stops at a Destination and needs to initate movement
+    public Car startMove(){
+
+            //Escapes the loop
+        if(this.finished){
+            return this;
+        }
+
+        int nextX = this.getX();
+        int nextY = this.getY();
+        char whichAxis;
+
+
+            //shortens the largest gap
+            //If xDiff  > yDiff EW
+            //If yDiff => xDiff NS
+        if(Math.abs(this.getXDiff()) > Math.abs(this.getYDiff())){
+            //Sets the direction from motionless
+            //+ or - 1 from the X axis
+            if(this.getXDiff() > 0){
+                nextX = nextX - 1;
+
+            }else{
+                nextX = nextX + 1;
+
+            }
+        }else{
+            //Sets the direction from motionless
+            //+ or - 1 from the Y axis
+            if(this.getYDiff() > 0){
+                nextY = nextY - 1;
+
+            }else{
+                nextY = nextY + 1;
+
+            }
+        }
+
+
+        Car nextCar = new Car(nextX, nextY, this.getCarNum());
+        nextCar.setSpeed(this.speed);
+        nextCar.setPrev(this);
+        nextCar.setDestination(this.map);
+
+        return nextCar;
+    }
+
+
+    //used to move the Car
+    public Car keepMove(){
+
+
+        int nextX = this.getX();
+        int nextY = this.getY();
+
+        /*
+            //Adds new coordinates to next iteration of Car
+        if(this.direction == 'X'){
+            if(this.atDestinationX()){
+                return this.startMove();
+
+            }
+            nextX = nextX + 1;
+
+        } else if(this.direction == 'X'){
+            if(this.atDestinationX()){
+                return this.startMove();
+            }
+            nextX = nextX - 1;
+
+        }else if(this.direction == 'Y'){
+            if(this.atDestinationY()){
+                return this.startMove();
+
+            }
+            nextY = nextY - 1;
+
+        }else if(this.direction == 'Y'){
+            if(this.atDestinationY()){
+
+                return this.startMove();
+
+            }
+            nextY = nextY + 1;
+
+        }
+
+        Car next = new Car(nextX, nextY, this.getCarNum());
+        next.setPrev(this);
+        next.setSpeed(this.speed);
+        next.setDestination(this.map);
+
+        return next;
+        */
+
+    }
+
+
 
 }
