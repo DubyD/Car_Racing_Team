@@ -67,17 +67,8 @@ public class Car extends GamePiece implements Cloneable{
 
 
 //--------------------------------------------Private Methods--------------------------------------
-        //Used to stamp passport with destinations
-    private void getNextDestination(){
-        this.passport.add(this.map.get(0).getToken());
-        this.map.remove(0);
 
-            //Once the passport is completely stamped the next turn will end this cars race
-        if(this.map.size() == 0){
-            this.finished = true;
-        }
-    }
-
+    //-------------------------------Destination Methods-------------------------------------------
     private Destination getCurrentDestination(){
         return this.map.get(0);
     }
@@ -96,6 +87,30 @@ public class Car extends GamePiece implements Cloneable{
         }
         return false;
     }
+
+    //Checks to see if the Car has made it to the Destination
+    private boolean gotThere(){
+        if(this.atDestinationX()){
+            if(this.atDestinationY()){
+
+                this.getNextDestination();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //Used to stamp passport with destinations
+    private void getNextDestination(){
+        this.passport.add(this.map.get(0).getToken());
+        this.map.remove(0);
+
+        //Once the passport is completely stamped the next turn will end this cars race
+        if(this.map.size() == 0){
+            this.finished = true;
+        }
+    }
+//-----------------------------------Movement Methods--------------------------------------------
 
         //Determines how far on the X-Axis the Car is away from it's next goal
     private int getXDiff(){
@@ -126,7 +141,7 @@ public class Car extends GamePiece implements Cloneable{
         this.prevSpot = past;
     }
 
-    public String setDisplay(){
+    public void setDisplay(){
         this.display(this.wheel.getDisplay());
     }
 
@@ -174,19 +189,11 @@ public class Car extends GamePiece implements Cloneable{
 //-------------------------Exotic Public Methods---------------------------------------------------
 
 
-
-        //Checks to see if the Car has made it to the Destination
-    public boolean gotThere(){
-        if(this.getX() == this.map.get(0).getX()){
-            if(this.map.get(0).getY() == this.getY()){
-
-
-                this.getNextDestination();
-                return true;
-            }
-        }
-        return false;
+    //Gets the car moving
+    public void revEngine() {
+        this.engine.setSpeed();
     }
+
 
         //used if vehicle stops at a Destination and needs to initate movement
         //Also used if the Vehicle needs to turn
@@ -196,8 +203,6 @@ public class Car extends GamePiece implements Cloneable{
         if(this.finished){
             return this;
         }
-
-        this.engine.setSpeed();
 
             //Used to set Coordinates of a new Car
         int nextX = this.getX();
@@ -209,11 +214,20 @@ public class Car extends GamePiece implements Cloneable{
 
             //Sets up return obj. with all of the initialized
         Car nextCar = (Car) this.clone();
+        nextCar.revEngine();
+
+            //Takes a Turn to go toward it's next goal
+            //Resets speed and Gui
+        if(this.gotThere()){
+            nextCar.getEngine().stop();
+            nextCar.getWheel().stop();
+            nextCar.setDisplay();
+            return nextCar;
+        }
 
             //If turning we want to ensure we are
             //moving to a non-blocked Axis
         if(this.wheel.getTurning()){
-
             int tempData = xDiff;
             xDiff = yDiff;
             yDiff = tempData;
@@ -277,11 +291,13 @@ public class Car extends GamePiece implements Cloneable{
             }
         }
 
-
+        nextCar.getWheel().stopTurning();
             //Adds the new Coordinates
         nextCar.setNewXY(nextX, nextY);
             //Sets a history of the previous turn
         nextCar.setPrev(this);
+            //Changes the Gui
+        nextCar.setDisplay();
 
         return nextCar;
     }
@@ -300,8 +316,7 @@ public class Car extends GamePiece implements Cloneable{
 
             //Sets up return obj. with all of the initialized
         Car nextCar = (Car) this.clone();
-
-
+        nextCar.revEngine();
 
             //Adds new coordinates to next iteration of Car
         if(this.wheel.getXY() == 'X'){
@@ -309,32 +324,23 @@ public class Car extends GamePiece implements Cloneable{
                 return this.startMove();
 
             }
-            nextX = nextX + 1;
-
-        } else if(this.wheel.getXY() == 'X'){
-            if(this.atDestinationX()){
-                return this.startMove();
-            }
-            nextX = nextX - 1;
+            nextX = nextX + this.wheel().getDirection();
 
         }else if(this.wheel.getXY() == 'Y'){
             if(this.atDestinationY()){
                 return this.startMove();
 
             }
-            nextY = nextY - 1;
-
-        }else if(this.wheel.getXY() == 'Y'){
-            if(this.atDestinationY()){
-
-                return this.startMove();
-
-            }
-            nextY = nextY + 1;
+            nextY = nextY + this.wheel().getDirection();
 
         }
 
+            //Sets up new Coordinates
+        nextCar.setNewXY(nextX, nextY);
+            //Sets a history of the previous turn
         nextCar.setPrev(this);
+            //Changes the Gui
+        nextCar.setDisplay();
 
         return nextCar;
 

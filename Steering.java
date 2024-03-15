@@ -27,13 +27,10 @@ public class Steering {
         //Sets whether this instance had to turn around an object
     public void setTurning() {
         this.turning = true;
+    }
 
-            //Changes the Cars Axis
-        if (this.directionXY == 'X') {
-            this.directionXY = 'Y'
-        }else{
-            this.directionXY = 'X';
-        }
+    public void stopTurning(){
+        this.turning = false;
     }
 
         //Sets which Axis this car is moving on.
@@ -49,11 +46,6 @@ public class Steering {
     }
     //-------------------------------Getters-------------------------------------------------
 
-        //Saves which Car this is
-    public String getCarNum(){
-        return this.carNum;
-    }
-
         //Used to get around objects
     public boolean getTurning(){
         return this.turning;
@@ -63,10 +55,16 @@ public class Steering {
     public char getXY(){
         return this.directionXY;
     }
-        //gets which direction on the axis it's moving
-    public int getDirection() {
+
+    public void stop(){
+        this.directionXY = ' ';
+        this.direction = 0;
+    }
+
+    public int getDirection(){
         return this.direction;
     }
+
 
         //Sets up the String to simulate Movement or lack of movement
     public String getDisplay(){

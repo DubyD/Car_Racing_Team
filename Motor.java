@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Motor{
     private int speed;
-    
+
     public Motor(){
         this.speed = 0;
     }
