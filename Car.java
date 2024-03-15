@@ -3,7 +3,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Car extends GamePiece {
+public class Car extends GamePiece implements Cloneable{
 
     //Creates a linked list of turn history
     private Car prevSpot;
@@ -97,16 +97,22 @@ public class Car extends GamePiece {
         return false;
     }
 
+        //Determines how far on the X-Axis the Car is away from it's next goal
     private int getXDiff(){
         int reply = this.getX() - this.map.get(0).getX();
         return reply;
     }
-
+        //Determines how far on the Y-Axis the Car is away from it's next goal
     private int getYDiff(){
         int reply = this.getY() - this.map.get(0).getY();
         return reply;
     }
 
+        //When a car moves, this gives it new coordinates
+    private void setNewXY(int x, int y){
+        this.x = x;
+        this.y = y;
+    }
 
 
 //--------------------------------------Public Methods-------------------------------------------
@@ -119,6 +125,8 @@ public class Car extends GamePiece {
     public void setPrev(Car past){
         this.prevSpot = past;
     }
+
+
 
     public boolean getFinished(){
         return this.finished;
@@ -133,7 +141,31 @@ public class Car extends GamePiece {
         return this.carNum;
     }
 
-//-------------------------Exotic Public Methods---------------------------------------------
+
+
+//------------------------------Exotic getters-----------------------------------------------------
+
+        //Used in TurnTaker
+    public Motor getEngine() {
+        return engine;
+    }
+        //Used in TurnTaker
+    public Steering getWheel(){
+        return this.wheel;
+    }
+
+        //Clones an Object to maintain direction and speed
+        //Meaning we dont need to adjust the steering and motor
+        //Everytime
+    @Override
+    public Object clone() throws CloneNotSupportedException{
+        return super.clone();
+    }
+
+
+//-------------------------Exotic Public Methods---------------------------------------------------
+
+
 
         //Checks to see if the Car has made it to the Destination
     public boolean gotThere(){
@@ -187,9 +219,12 @@ public class Car extends GamePiece {
         }
 
 
-        Car nextCar = new Car(nextX, nextY, this.getCarNum());
-        nextCar.setSpeed(this.speed);
+            //Adds the new Coordinates with the old Cars Num
+        Car nextCar = (Car) this.clone();
+        nextCar.setNewXY(nextX, nextY);
+            //Sets a history of the previous turn
         nextCar.setPrev(this);
+            //Keeps the Goals of the race attached to the correct car
         nextCar.setDestination(this.map);
 
         return nextCar;
