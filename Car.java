@@ -126,7 +126,9 @@ public class Car extends GamePiece implements Cloneable{
         this.prevSpot = past;
     }
 
-
+    public String setDisplay(){
+        this.display(this.wheel.getDisplay());
+    }
 
     public boolean getFinished(){
         return this.finished;
@@ -145,11 +147,17 @@ public class Car extends GamePiece implements Cloneable{
 
 //------------------------------Exotic getters-----------------------------------------------------
 
-        //Used in TurnTaker
-    public Motor getEngine() {
-        return engine;
+        //Used in TurnTaker in case there is a wall
+    public Car getPrev(){
+        this.prevSpot;
     }
-        //Used in TurnTaker
+
+        //Used in TurnTaker to speed up, slow down, or stop
+    public Motor getEngine() {
+        return this.engine;
+    }
+
+        //Used in TurnTaker to turn and get GuiDisplay
     public Steering getWheel(){
         return this.wheel;
     }
@@ -181,6 +189,7 @@ public class Car extends GamePiece implements Cloneable{
     }
 
         //used if vehicle stops at a Destination and needs to initate movement
+        //Also used if the Vehicle needs to turn
     public Car startMove(){
 
             //Escapes the loop
@@ -188,79 +197,134 @@ public class Car extends GamePiece implements Cloneable{
             return this;
         }
 
+        this.engine.setSpeed();
+
+            //Used to set Coordinates of a new Car
         int nextX = this.getX();
         int nextY = this.getY();
-        char whichAxis;
 
+            //Needed a separate variable in case of car avoiding a wall.
+        int xDiff = this.getXDiff();
+        int yDiff = this.getYDiff();
+
+            //Sets up return obj. with all of the initialized
+        Car nextCar = (Car) this.clone();
+
+            //If turning we want to ensure we are
+            //moving to a non-blocked Axis
+        if(this.wheel.getTurning()){
+
+            int tempData = xDiff;
+            xDiff = yDiff;
+            yDiff = tempData;
+
+                //Sets speed to 1, turning takes time
+            nextCar.getEngine().slowDown();
+
+        }
 
             //shortens the largest gap
             //If xDiff  > yDiff EW
             //If yDiff => xDiff NS
-        if(Math.abs(this.getXDiff()) > Math.abs(this.getYDiff())){
-            //Sets the direction from motionless
-            //+ or - 1 from the X axis
+            //If turning == true then xDiff <-> yDiff (are switched)
+        if(Math.abs(xDiff) > Math.abs(yDiff)){
+
+                //Sets the Current axis Direction
+            nextCar.getWheel().setDirectionXY('X');
+
+                //Sets the direction from motionless
+                //+ or - 1 from the X axis
             if(this.getXDiff() > 0){
                 nextX = nextX - 1;
+                    //Helps set the display of the CarGui
+                nextCar.getWheel().setDirection(-1);
 
+            }else if(this.getXDiff() < 0){
+                nextX = nextX + 1;
+                    //Helps set the display of the CarGui
+                nextCar.getWheel().setDirection(1);
+
+                //If Turning but on the Correct X Axis
+                //Automatically turns East
             }else{
                 nextX = nextX + 1;
-
+                    //Helps set the display of the CarGui
+                nextCar.getWheel().setDirection(1);
             }
         }else{
-            //Sets the direction from motionless
-            //+ or - 1 from the Y axis
+
+                //Sets the Current axis Direction
+            nextCar.getWheel().setDirectionXY('Y');
+                //Sets the direction from motionless
+                //+ or - 1 from the Y axis
             if(this.getYDiff() > 0){
                 nextY = nextY - 1;
+                    //Helps set the display of the CarGui
+                nextCar.getWheel().setDirection(-1);
 
+            }else if(this.getYDiff() < 0){
+                nextY = nextY + 1;
+                    //Helps set the display of the CarGui
+                nextCar.getWheel().setDirection(1);
+
+                //If Turning but on the Correct X Axis
+                //Automatically turns South
             }else{
                 nextY = nextY + 1;
+                    //Helps set the display of the CarGui
+                nextCar.getWheel().setDirection(1);
 
             }
         }
 
 
-            //Adds the new Coordinates with the old Cars Num
-        Car nextCar = (Car) this.clone();
+            //Adds the new Coordinates
         nextCar.setNewXY(nextX, nextY);
             //Sets a history of the previous turn
         nextCar.setPrev(this);
-            //Keeps the Goals of the race attached to the correct car
-        nextCar.setDestination(this.map);
 
         return nextCar;
     }
 
 
-    //used to move the Car
+        //used to move a moving Car
+        //if moving the Car cannot be finished
     public Car keepMove(){
-
 
         int nextX = this.getX();
         int nextY = this.getY();
 
-        /*
+            //Needed a separate variable in case of car avoiding a wall.
+        int xDiff = this.getXDiff();
+        int yDiff = this.getYDiff();
+
+            //Sets up return obj. with all of the initialized
+        Car nextCar = (Car) this.clone();
+
+
+
             //Adds new coordinates to next iteration of Car
-        if(this.direction == 'X'){
+        if(this.wheel.getXY() == 'X'){
             if(this.atDestinationX()){
                 return this.startMove();
 
             }
             nextX = nextX + 1;
 
-        } else if(this.direction == 'X'){
+        } else if(this.wheel.getXY() == 'X'){
             if(this.atDestinationX()){
                 return this.startMove();
             }
             nextX = nextX - 1;
 
-        }else if(this.direction == 'Y'){
+        }else if(this.wheel.getXY() == 'Y'){
             if(this.atDestinationY()){
                 return this.startMove();
 
             }
             nextY = nextY - 1;
 
-        }else if(this.direction == 'Y'){
+        }else if(this.wheel.getXY() == 'Y'){
             if(this.atDestinationY()){
 
                 return this.startMove();
@@ -270,13 +334,10 @@ public class Car extends GamePiece implements Cloneable{
 
         }
 
-        Car next = new Car(nextX, nextY, this.getCarNum());
-        next.setPrev(this);
-        next.setSpeed(this.speed);
-        next.setDestination(this.map);
+        nextCar.setPrev(this);
 
-        return next;
-        */
+        return nextCar;
+
 
     }
 

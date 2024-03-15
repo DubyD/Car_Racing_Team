@@ -25,8 +25,15 @@ public class Steering {
     }
 
         //Sets whether this instance had to turn around an object
-    public void setTurning(boolean yes){
-        this.turning = yes;
+    public void setTurning() {
+        this.turning = true;
+
+            //Changes the Cars Axis
+        if (this.directionXY == 'X') {
+            this.directionXY = 'Y'
+        }else{
+            this.directionXY = 'X';
+        }
     }
 
         //Sets which Axis this car is moving on.
