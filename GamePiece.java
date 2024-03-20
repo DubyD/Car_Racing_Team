@@ -1,3 +1,5 @@
+//Author WD
+
 public class GamePiece {
         //Every gamepiece has coordinates
     protected int x;

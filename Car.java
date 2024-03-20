@@ -88,7 +88,7 @@ public class Car extends GamePiece implements Cloneable{
         return false;
     }
 
-    //Checks to see if the Car has made it to the Destination
+        //Checks to see if the Car has made it to the Destination
     private boolean gotThere(){
         if(this.atDestinationX()){
             if(this.atDestinationY()){
@@ -100,7 +100,7 @@ public class Car extends GamePiece implements Cloneable{
         return false;
     }
 
-    //Used to stamp passport with destinations
+        //Used to stamp passport with destinations
     private void getNextDestination(){
         this.passport.add(this.map.get(0).getToken());
         this.map.remove(0);
@@ -144,6 +144,12 @@ public class Car extends GamePiece implements Cloneable{
     public void setDisplay(){
         this.display(this.wheel.getDisplay());
     }
+
+        //Used to set turning around objects
+    public void setTurning(){
+        this.wheel.setTurning();
+    }
+
 
     public boolean getFinished(){
         return this.finished;
@@ -320,6 +326,7 @@ public class Car extends GamePiece implements Cloneable{
 
             //Adds new coordinates to next iteration of Car
         if(this.wheel.getXY() == 'X'){
+
             if(this.atDestinationX()){
                 return this.startMove();
 
@@ -327,6 +334,7 @@ public class Car extends GamePiece implements Cloneable{
             nextX = nextX + this.wheel().getDirection();
 
         }else if(this.wheel.getXY() == 'Y'){
+
             if(this.atDestinationY()){
                 return this.startMove();
 
