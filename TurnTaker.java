@@ -47,12 +47,8 @@ public class TurnTaker extends TimerTask implements ActionListener{
     }
 
 
-    //----------------------------Deals with number of Turns---------------------------
-
-    private setTurns(){
-        this.turns = this.turns + 1;
-    }
-
+        //Used to export which turn it to update
+        //a label of which turn it is
     public getTurns(){
         return this.turns;
     }
@@ -64,8 +60,68 @@ public class TurnTaker extends TimerTask implements ActionListener{
         //Initiates the movement in the program
     @Override
     public void run(){
-        
+
+            //Everytime the Timer goes off this increments by 1
+        this.turns = this.turns + 1;
+
+        this.startGame();
+
+            //Used to check if the timer needs to stop
+        boolean gameOver = true;
+
+            //Checks to see if each Car is finished
+        for(Car next: this.gotham.getRacers()){
+
+                //Compares every Cars status. if they are all
+                //finished gameOver == true
+            gameOver = gameOver && next.getFinished();
+            if(next.getFinished()){
+
+                    //If next just finished, this sets how
+                    //long it took to finish
+                if(next.getTime() == 0){
+                    next.setTime(this.turns);
+                }
+            }
+        }
+
+        this.finished = gameOver;
+            //If gameOver == true, the clock stops
+        if(this.finished){
+            this.clock.stop();
+        }
+
+            //Updates the gui
+        this.guiUpdater.updateLabels();
+
     }
 
+        //Exports whether the game is over
+        //or not to Activate the end button
+    public boolean getFinished(){return this.finished;}
+
+    private void startGame(){
+
+            //New List to populate Gotham
+        List<Car> currentRacers = new ArrayList<Car>();
+
+       for(Car next : this.gotham.getRacers()){
+
+                //Skips finished racers
+           if(next.getFinished() == true){
+
+               this.gotham.removeRacer(next);
+               currentRacers.add(next);
+               continue;
+           }
+
+           if(next.getEngine().getSpeed() == 0){
+
+               
+           }
+       }
+
+
+    }
 
 }

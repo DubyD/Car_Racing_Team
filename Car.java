@@ -168,7 +168,7 @@ public class Car extends GamePiece implements Cloneable{
     }
 
     public String getResults(){
-        String reply = "Racer: "+ this.getCarNum() + " finished in " + this.getTurns() + " turns";
+        String reply = "Racer: "+ this.getCarNum() + " finished in " + this.getTime() + " turns";
         return reply;
     }
 

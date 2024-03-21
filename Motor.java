@@ -38,7 +38,9 @@ public class Motor{
         return this.speed;
     }
 
-
+    public int getSpeed(){
+        return this.speed;
+    }
 
 
         //Slows down if turning

@@ -238,7 +238,7 @@ public class City() {
             swapped = false;
             for(int i = 1; i < n; i++){
 
-                if(sorting[i-1].getTime() > sorting[i.getTime()]){
+                if(sorting[i-1].getTime() > sorting[i].getTime()){
                         //Swaps sorting[i-1] and sorting[i]
                         //if sorting[i] finished first
                     Car temp = sorting[i-1];
