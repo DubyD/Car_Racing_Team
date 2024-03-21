@@ -217,11 +217,54 @@ public class City() {
     }
 
         //Exports cars to iterate their results onto individual labels
-    public Car[] getResults(){
+    public String[] getResults(){
 
             //Components needed to help sort
             //from smallest to largests
+        int x = 0;
+        int n = this.racers.size();
+        boolean swapped;
 
+            //Sets up an array for easier sorting than a List
+        Car[] sorting = new Car[n];
+            //iterates the List into an Array
+        for(Car next : this.racers){
+            sorting[x] = next;
+            x++;
+        }
+
+        do{
+                //If swapped stays false it exits the loop
+            swapped = false;
+            for(int i = 1; i < n; i++){
+
+                if(sorting[i-1].getTime() > sorting[i.getTime()]){
+                        //Swaps sorting[i-1] and sorting[i]
+                        //if sorting[i] finished first
+                    Car temp = sorting[i-1];
+                    sorting[i-1] = sorting[i];
+                    sorting[i] = temp;
+                        //Keeps the Loop going
+                    swapped = true;
+                }
+            }
+        } while(swapped);
+
+            //Creates return string
+        String[] reply = new String[n];
+        for(int i = 0; i < n; i++){
+            reply[i] = sorting[i].getResults();
+        }
+
+        return reply;
     }
 
+
+        //toString() method to complete class
+    @Override
+    public String toString() {
+        String reply = "This class sets up the gameboard and acts" +
+                "as a switchboard to all the different components";
+        return reply;
+    }
 }

@@ -5,44 +5,49 @@ import java.util.List;
 
 public class Car extends GamePiece implements Cloneable{
 
-    //Creates a linked list of turn history
+        //Creates a linked list of turn history
     private Car prevSpot;
-    //Handles all speed functions and variables
+        //Handles all speed functions and variables
     private Motor engine;
-    //Handles direction and display of the Car obj.
+        //Handles direction and display of the Car obj.
     private Steering wheel;
-    //Handles an shuffled list of where this racer has
-    //to go to win the race
+        //Handles an shuffled list of where this racer has
+        //to go to win the race
     private List<Destination> map;
-    //Stamps each racers passport to make sure they
-    //hit all of their Destinations
+        //Stamps each racers passport to make sure they
+        //hit all of their Destinations
     private List<String> passport;
-    //Is this racer finished racing
+        //Is this racer finished racing
     private boolean finished;
-    //What does this racer look like
+        //What does this racer look like
     private String display;
-    //What number car is this
+        //What number car is this
     private String carNum;
+        //How long did it take to finish
+    private int time;
 
 
     //Constructor of class
     public Car(int x, int y, String carNum) {
 
-        //Base class
+            //Base class
         super(x, y);
 
-        //Sub class capabilities
+            //Sub class capabilities
         this.prevSpot = null;
         this.map = new ArrayList<Destination>();
         this.passport = new ArrayList<String>();
 
-        //For ending the game
+            //For ending the game
         this.finished = false;
 
-        //Saves which racer this is
+            //Saves which racer this is
         this.carNum = carNum;
 
-        //Complex Car Parts
+            //Number of turns it took to finish
+        this.time = 0;
+
+            //Complex Car Parts
         this.engine = new Motor();
         this.wheel = new Steering();
         this.wheel.setDisplay(carNum);
@@ -62,6 +67,7 @@ public class Car extends GamePiece implements Cloneable{
         this.engine = null;
         this.wheel = null;
         this.carNum = -1;
+        this.time = -1;
     }
 
 
@@ -150,7 +156,13 @@ public class Car extends GamePiece implements Cloneable{
         this.wheel.setTurning();
     }
 
+        //When the Car finishes sets the time it took (Number of Turns)
+    public void setTime(int finishTime){this.time = finishTime;}
 
+        //Retrieves the number that of turns it took to finish
+    public int getTime(){return this.time;}
+
+        //returns if this car finished or not
     public boolean getFinished(){
         return this.finished;
     }
@@ -182,6 +194,8 @@ public class Car extends GamePiece implements Cloneable{
     public Steering getWheel(){
         return this.wheel;
     }
+
+    public int getTime(){ return this.time}
 
         //Clones an Object to maintain direction and speed
         //Meaning we dont need to adjust the steering and motor
