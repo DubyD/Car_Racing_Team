@@ -260,11 +260,13 @@ public class City() {
     }
 
 
+
+
         //toString() method to complete class
     @Override
     public String toString() {
         String reply = "This class sets up the gameboard and acts" +
-                "as a switchboard to all the different components";
+                "as a holder to all the backend components";
         return reply;
     }
 }

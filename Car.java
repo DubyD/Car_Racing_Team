@@ -365,10 +365,5 @@ public class Car extends GamePiece implements Cloneable{
         nextCar.setDisplay();
 
         return nextCar;
-
-
     }
-
-
-
 }
