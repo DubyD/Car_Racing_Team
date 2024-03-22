@@ -70,16 +70,16 @@ public class TurnTaker extends TimerTask implements ActionListener{
         boolean gameOver = true;
 
             //Checks to see if each Car is finished
-        for(Car next: this.gotham.getRacers()){
+        for(Car next : this.gotham.getRacers()){
 
                 //Compares every Cars status. if they are all
                 //finished gameOver == true
             gameOver = gameOver && next.getFinished();
             if(next.getFinished()){
 
-                    //If next just finished, this sets how
+                    //If next(Car) just finished, this sets how
                     //long it took to finish
-                if(next.getTime() == 0){
+                if(next.getTimed() == 0){
                     next.setTime(this.turns);
                 }
             }
@@ -105,9 +105,11 @@ public class TurnTaker extends TimerTask implements ActionListener{
             //New List to populate Gotham
         List<Car> currentRacers = new ArrayList<Car>();
 
+            //iterates through the list to move cars
        for(Car next : this.gotham.getRacers()){
 
                 //Skips finished racers
+                //and adds them to the new list
            if(next.getFinished() == true){
 
                this.gotham.removeRacer(next);
@@ -115,13 +117,47 @@ public class TurnTaker extends TimerTask implements ActionListener{
                continue;
            }
 
+                //Checks the speed of each vehicle
+                //if it is 0 it startMove, if it's
+                //>0 it will keepMove
            if(next.getEngine().getSpeed() == 0){
 
-               
+                    //initiates new Car to move
+               Car check = next.startMove();
+
+                    //checks collision
+               boolean collided;
+               do{
+                   collided = false;
+
+
+               } while(collided);
+
+
+                    //if somehow finished imidiately it stops
+                    //the car from moving
+               if(check.gotThere() == true){
+                   check.getEngine().stop();
+               }
+               currentRacers.add(check);
+
+
+
            }
        }
+    }
 
+        //used to check collisions
+    private boolean(Car check){
+        for(GamePiece next : this.gotham.getWalls()){
+            if(check.getX() == next.getX()){
+                if(check.getY() == next.getY()){
+                    return false;
+                }
+            }
 
+        }
+        return true;
     }
 
 }

@@ -198,6 +198,9 @@ public class City() {
         return this.racers;
     }
 
+        //Used to export obstacles to check collision
+    public List<GamePiece> getWalls(){return this.walls;}
+
         //Removes last turns Racer
     public void removeRacer(Car remove){
         if(this.racers.contains(remove)){
@@ -238,7 +241,7 @@ public class City() {
             swapped = false;
             for(int i = 1; i < n; i++){
 
-                if(sorting[i-1].getTime() > sorting[i].getTime()){
+                if(sorting[i-1].getTimed() > sorting[i].getTimed()){
                         //Swaps sorting[i-1] and sorting[i]
                         //if sorting[i] finished first
                     Car temp = sorting[i-1];

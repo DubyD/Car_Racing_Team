@@ -160,7 +160,7 @@ public class Car extends GamePiece implements Cloneable{
     public void setTime(int finishTime){this.time = finishTime;}
 
         //Retrieves the number that of turns it took to finish
-    public int getTime(){return this.time;}
+    public int getTimed(){return this.time;}
 
         //returns if this car finished or not
     public boolean getFinished(){
@@ -247,6 +247,9 @@ public class Car extends GamePiece implements Cloneable{
 
             //If turning we want to ensure we are
             //moving to a non-blocked Axis
+            //also alters the x,yDiff so the Car
+            //can continue on the original direction
+            //after turning
         if(this.wheel.getTurning()){
             int tempData = xDiff;
             xDiff = yDiff;
@@ -254,7 +257,6 @@ public class Car extends GamePiece implements Cloneable{
 
                 //Sets speed to 1, turning takes time
             nextCar.getEngine().slowDown();
-
         }
 
             //shortens the largest gap
@@ -311,6 +313,7 @@ public class Car extends GamePiece implements Cloneable{
             }
         }
 
+            //Stops the Car from turning again
         nextCar.getWheel().stopTurning();
             //Adds the new Coordinates
         nextCar.setNewXY(nextX, nextY);
