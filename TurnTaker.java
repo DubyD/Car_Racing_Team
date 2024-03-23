@@ -148,16 +148,16 @@ public class TurnTaker extends TimerTask implements ActionListener{
     }
 
         //used to check collisions
-    private boolean(Car check){
+    private boolean collision(Car check){
         for(GamePiece next : this.gotham.getWalls()){
             if(check.getX() == next.getX()){
                 if(check.getY() == next.getY()){
-                    return false;
+                    return true;
                 }
             }
 
         }
-        return true;
+        return false;
     }
 
 }
