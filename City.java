@@ -1,12 +1,14 @@
-//Author WD
 
+
+//Author WD
+//Some bug fixes by AW (3-23)
 
 import sun.security.krb5.internal.crypto.Des;
 
 import java.util.*;
 
 
-public class City() {
+public class City {
 
         //Holds all the pieces of the Game
     private List<GamePiece> board;
@@ -36,9 +38,10 @@ public class City() {
 
             //Adding the pieces to the board
             //Keeps all the pieces together
-        this.board.add(this.stops);
-        this.board.add(this.racers);
-        this.board.add(this.walls);
+                //AW (3-23) Changed add() to addAll()
+        this.board.addAll(this.stops);
+        this.board.addAll(this.racers);
+        this.board.addAll(this.walls);
 
     }
 
@@ -199,7 +202,9 @@ public class City() {
     }
 
         //Used to export obstacles to check collision
-    public List<GamePiece> getWalls(){return this.walls;}
+    public List<GamePiece> getWalls(){
+        return this.walls;
+    }
 
         //Removes last turns Racer
     public void removeRacer(Car remove){
@@ -261,9 +266,6 @@ public class City() {
 
         return reply;
     }
-
-
-
 
         //toString() method to complete class
     @Override

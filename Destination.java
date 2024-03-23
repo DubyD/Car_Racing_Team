@@ -1,3 +1,5 @@
+
+
 //Author WD
 
 public class Destination extends GamePiece{

@@ -1,5 +1,7 @@
-//Author WD
 
+
+//Author WD
+//GW fixed some bugs I found
 public class Steering {
 
     private char directionXY;
@@ -14,14 +16,14 @@ public class Steering {
         this.turning = false;
         this.direction = 0;
         this.directionXY = ' ';
-        this.carNum = 0;
+        this.carNum = "0";
     }
 //-------------------------------Setters-----------------------------------------------------
 
         //Sets the initial look of a Car obj.
     public void setDisplay(String display){
         this.carNum = display;
-        this.display("|" + carNum + "|");
+        this.display = "|" + carNum + "|";
     }
 
         //Sets whether this instance had to turn around an object

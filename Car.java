@@ -1,7 +1,12 @@
+
+
 //Author WD
+//3-23 AW fixed some bugs I found
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Car extends GamePiece implements Cloneable{
 
@@ -66,7 +71,7 @@ public class Car extends GamePiece implements Cloneable{
         this.display = " ";
         this.engine = null;
         this.wheel = null;
-        this.carNum = -1;
+        this.carNum = "-1";
         this.time = -1;
     }
 
@@ -95,7 +100,8 @@ public class Car extends GamePiece implements Cloneable{
     }
 
         //Checks to see if the Car has made it to the Destination
-    private boolean gotThere(){
+            //AW - changed method to public so it could be accessed from TurnTaker() in startGame()
+    public boolean gotThere(){
         if(this.atDestinationX()){
             if(this.atDestinationY()){
 
@@ -182,7 +188,7 @@ public class Car extends GamePiece implements Cloneable{
 
         //Used in TurnTaker in case there is a wall
     public Car getPrev(){
-        this.prevSpot;
+        return this.prevSpot; 
     }
 
         //Used in TurnTaker to speed up, slow down, or stop
@@ -195,7 +201,9 @@ public class Car extends GamePiece implements Cloneable{
         return this.wheel;
     }
 
-    public int getTime(){ return this.time}
+    public int getTime(){ 
+        return this.time;
+                }
 
         //Clones an Object to maintain direction and speed
         //Meaning we dont need to adjust the steering and motor
@@ -233,7 +241,12 @@ public class Car extends GamePiece implements Cloneable{
         int yDiff = this.getYDiff();
 
             //Sets up return obj. with all of the initialized
-        Car nextCar = (Car) this.clone();
+        Car nextCar = null;
+        try {
+            nextCar = (Car) this.clone();
+        } catch (CloneNotSupportedException ex) {
+            Logger.getLogger(Car.class.getName()).log(Level.SEVERE, null, ex);
+        }
         nextCar.revEngine();
 
             //Takes a Turn to go toward it's next goal
@@ -338,7 +351,12 @@ public class Car extends GamePiece implements Cloneable{
         int yDiff = this.getYDiff();
 
             //Sets up return obj. with all of the initialized
-        Car nextCar = (Car) this.clone();
+        Car nextCar = null;
+        try {
+            nextCar = (Car) this.clone();
+        } catch (CloneNotSupportedException ex) {
+            Logger.getLogger(Car.class.getName()).log(Level.SEVERE, null, ex);
+        }
         nextCar.revEngine();
 
             //Adds new coordinates to next iteration of Car
@@ -348,7 +366,7 @@ public class Car extends GamePiece implements Cloneable{
                 return this.startMove();
 
             }
-            nextX = nextX + this.wheel().getDirection();
+            nextX = nextX + this.wheel.getDirection();
 
         }else if(this.wheel.getXY() == 'Y'){
 
@@ -356,7 +374,7 @@ public class Car extends GamePiece implements Cloneable{
                 return this.startMove();
 
             }
-            nextY = nextY + this.wheel().getDirection();
+            nextY = nextY + this.wheel.getDirection();
 
         }
 
@@ -368,5 +386,9 @@ public class Car extends GamePiece implements Cloneable{
         nextCar.setDisplay();
 
         return nextCar;
+    }
+
+    private void display(String display) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

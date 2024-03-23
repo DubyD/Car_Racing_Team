@@ -1,3 +1,5 @@
+
+
 //Author WD
 
 
@@ -49,7 +51,7 @@ public class TurnTaker extends TimerTask implements ActionListener{
 
         //Used to export which turn it to update
         //a label of which turn it is
-    public getTurns(){
+    public int getTurns(){
         return this.turns;
     }
 
