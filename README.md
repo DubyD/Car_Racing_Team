@@ -1,7 +1,10 @@
 <h1 align="center">Car Racing Team</h1>
 
 ### Description:
-This program is a prototype for a car racing game with a graphical interface. It simulates races between cars traveling from one stop to another. The program displays each car's path, speed, and total race time, declaring the winner based on the fastest completion time.
+This program is a prototype for a car racing game with a graphical interface.
+It simulates races between cars traveling from one stop to another.
+The program displays each car's path, speed, and total race time, declaring
+the winner based on the fastest completion time.
 
 ### How to Run:
 1. Clone the repository to your local machine.

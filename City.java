@@ -165,7 +165,7 @@ public class City {
         //creates randomizer
         Random randomizer = new Random();
 
-        for(int i = 0; i < (dimension - 2); i++) {
+        for(int i = 0; i < (dimension / 3); i++) {
 
             //initiates Random X,Y locations
             int randomX;

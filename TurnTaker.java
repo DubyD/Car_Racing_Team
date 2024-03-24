@@ -128,12 +128,14 @@ public class TurnTaker extends TimerTask implements ActionListener{
                Car check = next.startMove();
 
                     //checks collision
-               boolean collided;
+               boolean collided = this.collision(check);
+
+                    //sets next to turning if there is a collision
+                    //iterates through a Loop until space is free
                do{
-                   collided = false;
-
-
-               } while(collided);
+                   next.setTurning();
+                   check = next.startMove();
+               }while(collision(check));
 
 
                     //if somehow finished imidiately it stops
@@ -144,6 +146,8 @@ public class TurnTaker extends TimerTask implements ActionListener{
                currentRacers.add(check);
 
 
+
+           }else{
 
            }
        }
