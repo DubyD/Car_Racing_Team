@@ -346,10 +346,6 @@ public class Car extends GamePiece implements Cloneable{
         int nextX = this.getX();
         int nextY = this.getY();
 
-            //Needed a separate variable in case of car avoiding a wall.
-        int xDiff = this.getXDiff();
-        int yDiff = this.getYDiff();
-
             //Sets up return obj. with all of the initialized
         Car nextCar = null;
         try {

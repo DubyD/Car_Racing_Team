@@ -114,8 +114,9 @@ public class TurnTaker extends TimerTask implements ActionListener{
                 //and adds them to the new list
            if(next.getFinished() == true){
 
-               this.gotham.removeRacer(next);
                currentRacers.add(next);
+                    //Removes racer so it doesnt keep duplicating the finished racer
+               this.gotham.removeRacer(next);
                continue;
            }
 
@@ -127,16 +128,14 @@ public class TurnTaker extends TimerTask implements ActionListener{
                     //initiates new Car to move
                Car check = next.startMove();
 
-                    //checks collision
-               boolean collided = this.collision(check);
-
                     //sets next to turning if there is a collision
                     //iterates through a Loop until space is free
-               do{
-                   next.setTurning();
-                   check = next.startMove();
-               }while(collision(check));
-
+               if(collision(check)) {
+                   do {
+                       next.setTurning();
+                       check = next.startMove();
+                   } while (collision(check));
+               }
 
                     //if somehow finished imidiately it stops
                     //the car from moving
@@ -144,12 +143,62 @@ public class TurnTaker extends TimerTask implements ActionListener{
                    check.getEngine().stop();
                }
                currentRacers.add(check);
-
+               this.gotham.removeRacer(check.getPrev());
 
 
            }else{
 
+                    //Used to store the checks before
+                    //the adding to the new Racers
+               List<Car> doubleCheck = new ArrayList<>();
+               for(int i = 0; i < next.getEngine().getSpeed(); i++) {
+
+
+                   Car check = next.keepMove();
+
+
+                        //sets next to turning if there is a collision
+                        //iterates through a Loop until space is free
+                   if(collision(check)) {
+                       do {
+                           next.setTurning();
+                           check = next.startMove();
+                       } while (collision(check));
+                   }
+
+                        //Checks to see if this is the first
+                        //instance in the forLoop to remove the
+                        //original Racer from the board and add
+                        //the
+                   if(check.getPrev() == next) {
+
+                       doubleCheck.add(check);
+                       this.gotham.removeRacer(check.getPrev());
+
+
+                   }else if(doubleCheck.contains(check.getPrev())) {
+
+                       doubleCheck.remove(check.getPrev());
+                       doubleCheck.add(check);
+
+                   }
+
+                        //Checks if it hit the destination
+                   if(check.gotThere()){
+
+                       check.getEngine().stop();
+                            //Will help end the forloop
+                       i = i + 1;
+                   }
+               }
+
+               currentRacers.addAll(doubleCheck);
+
            }
+
+                //This will be the new positions of the contestants
+           this.gotham.setRacers(currentRacers);
+
        }
     }
 
