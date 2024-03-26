@@ -63,6 +63,8 @@ public class Motor{
         return false;
     }
 
+
+        //Added this to complete this as a java class
     @Override
     public String toString(){
         String reply = "This handles all of the speed functionality of the Car obj.";
