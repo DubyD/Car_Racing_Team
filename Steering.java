@@ -5,15 +5,15 @@
 public class Steering {
 
     private char directionXY;
+
     private int direction;
-    private boolean turning;
+
     private String display;
 
     private String carNum;
 
     public Steering(){
         this.display = "";
-        this.turning = false;
         this.direction = 0;
         this.directionXY = ' ';
         this.carNum = "0";
@@ -24,15 +24,6 @@ public class Steering {
     public void setDisplay(String display){
         this.carNum = display;
         this.display = "|" + carNum + "|";
-    }
-
-        //Sets whether this instance had to turn around an object
-    public void setTurning() {
-        this.turning = true;
-    }
-
-    public void stopTurning(){
-        this.turning = false;
     }
 
         //Sets which Axis this car is moving on.
@@ -47,11 +38,6 @@ public class Steering {
         this.direction = num;
     }
     //-------------------------------Getters-------------------------------------------------
-
-        //Used to get around objects
-    public boolean getTurning(){
-        return this.turning;
-    }
 
         //gets which axis it's moving on
     public char getXY(){

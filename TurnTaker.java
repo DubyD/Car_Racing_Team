@@ -130,15 +130,6 @@ public class TurnTaker extends TimerTask implements ActionListener{
                     //initiates new Car to move
                Car check = next.startMove();
 
-                    //sets next to turning if there is a collision
-                    //iterates through a Loop until space is free
-               if(collision(check)) {
-                   do {
-                       next.setTurning();
-                       check = next.startMove();
-                   } while (collision(check));
-               }
-
                     //if somehow finished imidiately it stops
                     //the car from moving
                if(check.gotThere() == true){
@@ -164,19 +155,10 @@ public class TurnTaker extends TimerTask implements ActionListener{
                        check = doubleCheck.get(0).keepMove();
                    }
 
-                   //sets next to turning if there is a collision
-                   //iterates through a Loop until space is free
-                   if(collision(check)) {
-                       do {
-                           next.setTurning();
-                           check = next.startMove();
-                       } while (collision(check));
-                   }
 
                    //Checks to see if this is the first
                         //instance in the forLoop to remove the
                         //original Racer from the board and add
-                        //the
                    if(check.getPrev() == next) {
 
                        doubleCheck.add(check);
@@ -209,16 +191,4 @@ public class TurnTaker extends TimerTask implements ActionListener{
        }
     }
 
-    //used to check collisions
-    private boolean collision(Car check){
-        for(GamePiece next : this.gotham.getWalls()){
-            if(check.getX() == next.getX()){
-                if(check.getY() == next.getY()){
-                    return true;
-                }
-            }
-
-        }
-        return false;
-    }
 }

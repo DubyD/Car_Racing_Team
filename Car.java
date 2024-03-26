@@ -155,11 +155,6 @@ public class Car extends GamePiece implements Cloneable{
         this.display(this.wheel.getDisplay());
     }
 
-        //Used to set turning around objects
-    public void setTurning(){
-        this.wheel.setTurning();
-    }
-
         //When the Car finishes sets the time it took (Number of Turns)
     public void setTime(int finishTime){this.time = finishTime;}
 
@@ -256,19 +251,6 @@ public class Car extends GamePiece implements Cloneable{
             return nextCar;
         }
 
-            //If turning we want to ensure we are
-            //moving to a non-blocked Axis
-            //also alters the x,yDiff so the Car
-            //can continue on the original direction
-            //after turning
-        if(this.wheel.getTurning()){
-            int tempData = xDiff;
-            xDiff = yDiff;
-            yDiff = tempData;
-
-                //Sets speed to 1, turning takes time
-            nextCar.getEngine().slowDown();
-        }
 
             //shortens the largest gap
             //If xDiff  > yDiff EW

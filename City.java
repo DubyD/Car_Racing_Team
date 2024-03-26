@@ -19,8 +19,6 @@ public class City {
         //Holds all the competitors in an easy to access list
     private List<Car> racers;
 
-        //Holds all obstacles the racers may run into
-    private List<GamePiece> walls;
 
         //Main Constructor
     public City(int dimension, int numOfCars){
@@ -29,19 +27,16 @@ public class City {
         this.board = new ArrayList<GamePiece>();
         this.stops = new ArrayList<Destination>();
         this.racers = new ArrayList<Car>();
-        this.walls = new ArrayList<GamePiece>();
 
             //Factory Methods Setting the Lists
         this.makeDestinations(dimension);
         this.addCompetitors(dimension, numOfCars);
-        this.setWalls(dimension);
 
             //Adding the pieces to the board
             //Keeps all the pieces together
                 //AW (3-23) Changed add() to addAll()
         this.board.addAll(this.stops);
         this.board.addAll(this.racers);
-        this.board.addAll(this.walls);
 
     }
 
@@ -50,7 +45,6 @@ public class City {
         this.board = null;
         this.stops = null;
         this.racers = null;
-        this.walls = null;
     }
 
 //------------------------Methods used in Factory Methods----------------------------
@@ -77,12 +71,6 @@ public class City {
         }
 
         for(Car next : this.racers){
-            if(!validSpot(x, y, next)){
-                return false;
-            }
-        }
-
-        for(GamePiece next : this.walls){
             if(!validSpot(x, y, next)){
                 return false;
             }
@@ -161,29 +149,7 @@ public class City {
     }//End of Shuffling racers objectives
 
 
-    private void setWalls(int dimension){
-        //creates randomizer
-        Random randomizer = new Random();
 
-        for(int i = 0; i < (dimension / 3); i++) {
-
-            //initiates Random X,Y locations
-            int randomX;
-            int randomY;
-
-            do {
-                //Randomizers X, and Y until the space is valid
-                //Ensures that the walls wouldn't be placed on the Border
-                //of the board
-                randomX = (randomizer.nextInt((dimension - 2)) + 1);
-                randomY = (randomizer.nextInt((dimension - 2)) + 1);
-            } while (!this.isFreeSpace(randomX, randomY));
-
-            //Creates new Wall and adds it to walls
-            GamePiece adding = new GamePiece(randomX, randomY);
-            this.walls.add(adding);
-        }
-    }//End of Obstacle Factory
 
 //---------------------------Getters-------------------------------------------------------
 
@@ -199,11 +165,6 @@ public class City {
         //Give the ability to get List of Competitors
     public List<Car> getRacers(){
         return this.racers;
-    }
-
-        //Used to export obstacles to check collision
-    public List<GamePiece> getWalls(){
-        return this.walls;
     }
 
         //Removes last turns Racer
