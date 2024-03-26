@@ -1,6 +1,7 @@
 
 
 //Author WD
+//EL fixed some grammatical errors
 
 public class Destination extends GamePiece{
 
@@ -9,7 +10,7 @@ public class Destination extends GamePiece{
 
     public Destination(int x, int y, String display){
 
-        //Setting up baseclass coordinates,
+        //Setting up base class coordinates,
         //toString, isSolid boolean
         super(x,y);
         this.setDisplay(display);

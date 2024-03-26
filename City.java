@@ -2,8 +2,7 @@
 
 //Author WD
 //Some bug fixes by AW (3-23)
-
-import sun.security.krb5.internal.crypto.Des;
+//EL fixed some grammatical errors
 
 import java.util.*;
 
@@ -103,7 +102,7 @@ public class City {
             Destination adding = new Destination(randomX, randomY, String.valueOf(stop));
             this.stops.add(adding);
 
-                //interates the stops name through A, B, C, D
+                //iterates the stops name through A, B, C, D
             stop = (char) (stop + 1);
         }
     }//End of Destination Factory
@@ -189,7 +188,7 @@ public class City {
     public String[] getResults(){
 
             //Components needed to help sort
-            //from smallest to largests
+            //from smallest to largest
         int x = 0;
         int n = this.racers.size();
         boolean swapped;
@@ -231,7 +230,7 @@ public class City {
         //toString() method to complete class
     @Override
     public String toString() {
-        String reply = "This class sets up the gameboard and acts" +
+        String reply = "This class sets up the game board and acts" +
                 "as a holder to all the backend components";
         return reply;
     }

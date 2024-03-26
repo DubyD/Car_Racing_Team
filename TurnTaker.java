@@ -1,7 +1,7 @@
 
 
 //Author WD
-
+//EL fixed some grammatical errors
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -63,7 +63,7 @@ public class TurnTaker extends TimerTask implements ActionListener{
     @Override
     public void run(){
 
-            //Everytime the Timer goes off this increments by 1
+            //Every time the Timer goes off this increments by 1
         this.turns = this.turns + 1;
 
         this.startGame();
@@ -117,7 +117,7 @@ public class TurnTaker extends TimerTask implements ActionListener{
            if(next.getFinished() == true){
 
                currentRacers.add(next);
-                    //Removes racer so it doesnt keep duplicating the finished racer
+                    //Removes racer so it doesn't keep duplicating the finished racer
                this.gotham.removeRacer(next);
                continue;
            }
@@ -130,7 +130,7 @@ public class TurnTaker extends TimerTask implements ActionListener{
                     //initiates new Car to move
                Car check = next.startMove();
 
-                    //if somehow finished imidiately it stops
+                    //if somehow finished immediately it stops
                     //the car from moving
                if(check.gotThere() == true){
                    check.getEngine().stop();
@@ -164,7 +164,7 @@ public class TurnTaker extends TimerTask implements ActionListener{
                        doubleCheck.add(check);
                        this.gotham.removeRacer(check.getPrev());
 
-                        //If speed == 2 it will iterate throught this loop
+                        //If speed == 2 it will iterate through this loop
                    }else if(doubleCheck.contains(check.getPrev())) {
 
                        doubleCheck.remove(check.getPrev());
@@ -176,7 +176,7 @@ public class TurnTaker extends TimerTask implements ActionListener{
                    if(check.gotThere()){
 
                        check.getEngine().stop();
-                            //Will help end the forloop
+                            //Will help end the for loop
                        i = i + 1;
                    }
                }
