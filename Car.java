@@ -305,9 +305,6 @@ public class Car extends GamePiece implements Cloneable{
 
             }
         }
-
-            //Stops the Car from turning again
-        nextCar.getWheel().stopTurning();
             //Adds the new Coordinates
         nextCar.setNewXY(nextX, nextY);
             //Sets a history of the previous turn
