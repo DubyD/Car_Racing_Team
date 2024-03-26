@@ -152,7 +152,7 @@ public class Car extends GamePiece implements Cloneable{
     }
 
     public void setDisplay(){
-        this.display(this.wheel.getDisplay());
+        this.setDisplay(this.wheel.getDisplay());
     }
 
         //When the Car finishes sets the time it took (Number of Turns)
@@ -167,7 +167,7 @@ public class Car extends GamePiece implements Cloneable{
     }
 
     public String getResults(){
-        String reply = "Racer: "+ this.getCarNum() + " finished in " + this.getTime() + " turns";
+        String reply = "Racer: "+ this.getCarNum() + " finished in " + this.getTimed() + " turns";
         return reply;
     }
 
@@ -194,9 +194,6 @@ public class Car extends GamePiece implements Cloneable{
         return this.wheel;
     }
 
-    public int getTime(){ 
-        return this.time;
-                }
 
         //Clones an Object to maintain direction and speed
         //Meaning we dont need to adjust the steering and motor
