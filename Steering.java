@@ -73,4 +73,10 @@ public class Steering {
         }
         return reply;
     }
+
+    @Override
+    public String toString(){
+        String reply = "Handles all of the Directional methods/attributes of a car class"+
+                        "also handling the display of the car as well");
+    }
 }
