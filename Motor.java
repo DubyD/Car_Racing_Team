@@ -15,7 +15,7 @@ public class Motor{
 
 
         //When moving the car may speed up
-    public int setSpeed(){
+    public void setSpeed(){
 
         Random randomizer = new Random();
 
@@ -36,18 +36,10 @@ public class Motor{
                 this.speed = 1;
             }
         }
-
-        return this.speed;
     }
 
     public int getSpeed(){
         return this.speed;
-    }
-
-
-        //Slows down if turning
-    public void slowDown(){
-        this.speed = 1;
     }
 
         //Stops at each Destination
@@ -69,6 +61,14 @@ public class Motor{
             return true;
         }
         return false;
+    }
+
+
+        //Added this to complete this as a java class
+    @Override
+    public String toString(){
+        String reply = "This handles all of the speed functionality of the Car obj.";
+        return reply;
     }
 
 
