@@ -2,6 +2,7 @@
 
 //Author WD
 //3-23 AW fixed some bugs I found
+//EL fixed some grammatical errors
 
 import java.util.ArrayList;
 import java.util.List;
@@ -100,12 +101,9 @@ public class Car extends GamePiece implements Cloneable{
         //Checks to see if the Car has made it to the Destination
             //AW - changed method to public so it could be accessed from TurnTaker() in startGame()
     public boolean gotThere(){
-        if(this.atDestinationX()){
-            if(this.atDestinationY()){
-
-                this.getNextDestination();
-                return true;
-            }
+        if(this.atDestinationX() && this.atDestinationY()){
+            this.getNextDestination();
+            return true;
         }
         return false;
     }
@@ -152,7 +150,7 @@ public class Car extends GamePiece implements Cloneable{
     }
 
     public void setDisplay(){
-        this.display(this.wheel.getDisplay());
+        this.setDisplay(this.wheel.getDisplay());
     }
 
         //When the Car finishes sets the time it took (Number of Turns)
@@ -199,8 +197,8 @@ public class Car extends GamePiece implements Cloneable{
                 }
 
         //Clones an Object to maintain direction and speed
-        //Meaning we dont need to adjust the steering and motor
-        //Everytime
+        //Meaning we don't need to adjust the steering and motor
+        //Every time
     @Override
     public Object clone() throws CloneNotSupportedException{
         return super.clone();
@@ -216,7 +214,7 @@ public class Car extends GamePiece implements Cloneable{
     }
 
 
-        //used if vehicle stops at a Destination and needs to initate movement
+        //used if vehicle stops at a Destination and needs to initiate movement
         //Also used if the Vehicle needs to turn
     public Car startMove(){
 
@@ -361,7 +359,7 @@ public class Car extends GamePiece implements Cloneable{
         return nextCar;
     }
 
-        //The display is in the baseclass, set by steering due to directionals
+        //The display is in the base class, set by steering due to directions
         //affecting the display
     /*
     private void display(String display) {

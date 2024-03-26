@@ -2,6 +2,8 @@
 
 //Author WD
 //GW fixed some bugs I found
+//EL fixed some grammatical errors
+
 public class Steering {
 
     private char directionXY;
@@ -58,13 +60,13 @@ public class Steering {
     public String getDisplay(){
 
         String reply = this.display;
-        if(this.directionXY == 'Y'){
+        if(this.directionXY == 'X'){
             if(this.direction > 0){
                 reply = reply + ">";
             }else {
                 reply = "<" + reply;
             }
-        }else if(this.directionXY == 'X'){
+        }else if(this.directionXY == 'Y'){
             if(this.direction > 0){
                 reply = reply + "\nv";
             }else {

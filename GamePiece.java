@@ -1,9 +1,10 @@
 
 
 //Author WD
+//EL fixed some grammatical errors
 
 public class GamePiece {
-        //Every gamepiece has coordinates
+        //Every game piece has coordinates
     protected int x;
     protected int y;
 
@@ -19,7 +20,7 @@ public class GamePiece {
 
     }
 
-        //Second non-paramter constructor to complete the object
+        //Second non-parameter constructor to complete the object
     public GamePiece(){
         this.x = -1;
         this.y = -1;
