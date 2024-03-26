@@ -106,9 +106,11 @@ public class TurnTaker extends TimerTask implements ActionListener{
 
             //New List to populate Gotham
         List<Car> currentRacers = new ArrayList<Car>();
+            //Has a list of the racers from last turn
+        List<Car> oldRacers = new ArrayList<>(this.gotham.getRacers());
 
             //iterates through the list to move cars
-       for(Car next : this.gotham.getRacers()){
+       for(Car next : oldRacers){
 
                 //Skips finished racers
                 //and adds them to the new list
@@ -153,12 +155,17 @@ public class TurnTaker extends TimerTask implements ActionListener{
                List<Car> doubleCheck = new ArrayList<>();
                for(int i = 0; i < next.getEngine().getSpeed(); i++) {
 
+                        //Checks to see if it is the first
+                        //or second time through the loop
+                   Car check;
+                   if(doubleCheck.isEmpty()) {
+                       check = next.keepMove();
+                   }else{
+                       check = doubleCheck.get(0).keepMove();
+                   }
 
-                   Car check = next.keepMove();
-
-
-                        //sets next to turning if there is a collision
-                        //iterates through a Loop until space is free
+                   //sets next to turning if there is a collision
+                   //iterates through a Loop until space is free
                    if(collision(check)) {
                        do {
                            next.setTurning();
@@ -166,7 +173,7 @@ public class TurnTaker extends TimerTask implements ActionListener{
                        } while (collision(check));
                    }
 
-                        //Checks to see if this is the first
+                   //Checks to see if this is the first
                         //instance in the forLoop to remove the
                         //original Racer from the board and add
                         //the
@@ -175,7 +182,7 @@ public class TurnTaker extends TimerTask implements ActionListener{
                        doubleCheck.add(check);
                        this.gotham.removeRacer(check.getPrev());
 
-
+                        //If speed == 2 it will iterate throught this loop
                    }else if(doubleCheck.contains(check.getPrev())) {
 
                        doubleCheck.remove(check.getPrev());
@@ -202,7 +209,7 @@ public class TurnTaker extends TimerTask implements ActionListener{
        }
     }
 
-        //used to check collisions
+    //used to check collisions
     private boolean collision(Car check){
         for(GamePiece next : this.gotham.getWalls()){
             if(check.getX() == next.getX()){
@@ -214,5 +221,4 @@ public class TurnTaker extends TimerTask implements ActionListener{
         }
         return false;
     }
-
 }

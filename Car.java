@@ -24,8 +24,6 @@ public class Car extends GamePiece implements Cloneable{
     private List<String> passport;
         //Is this racer finished racing
     private boolean finished;
-        //What does this racer look like
-    private String display;
         //What number car is this
     private String carNum;
         //How long did it take to finish
@@ -56,6 +54,7 @@ public class Car extends GamePiece implements Cloneable{
         this.engine = new Motor();
         this.wheel = new Steering();
         this.wheel.setDisplay(carNum);
+        this.setDisplay();
     }
 
     //Parameter free constructor to complete the class
@@ -68,7 +67,6 @@ public class Car extends GamePiece implements Cloneable{
         this.map = null;
         this.passport = null;
         this.finished = false;
-        this.display = " ";
         this.engine = null;
         this.wheel = null;
         this.carNum = "-1";
@@ -384,7 +382,10 @@ public class Car extends GamePiece implements Cloneable{
         return nextCar;
     }
 
+        //The display is in the baseclass, set by steering due to directionals
+        //affecting the display
+    /*
     private void display(String display) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    }*/
 }

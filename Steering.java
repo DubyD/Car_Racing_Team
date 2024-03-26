@@ -71,19 +71,20 @@ public class Steering {
         //Sets up the String to simulate Movement or lack of movement
     public String getDisplay(){
 
-        if(this.directionXY == 'X'){
+        String reply = this.display;
+        if(this.directionXY == 'Y'){
             if(this.direction > 0){
-                this.display = this.display + ">";
+                reply = reply + ">";
             }else {
-                this.display = "<" + this.display;
+                reply = "<" + reply;
             }
-        }else if(this.directionXY == 'Y'){
+        }else if(this.directionXY == 'X'){
             if(this.direction > 0){
-                this.display = this.display + "\nv";
+                reply = reply + "\nv";
             }else {
-                this.display = "^\n" + this.display;
+                reply = "^\n" + reply;
             }
         }
-        return this.display;
+        return reply;
     }
 }
