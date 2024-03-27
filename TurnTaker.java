@@ -82,7 +82,7 @@ public class TurnTaker extends TimerTask implements ActionListener{
                     //If next(Car) just finished, this sets how
                     //long it took to finish
                 if(next.getTimed() == 0){
-                    next.setTime(this.turns);
+                    next.setTime(this.getTurns());
                 }
             }
         }
@@ -190,6 +190,13 @@ public class TurnTaker extends TimerTask implements ActionListener{
        }
             //This will be the new positions of the contestants
         this.gotham.setRacers(currentRacers);
+    }
+
+        //To complete the class I added a toString method
+    @Override
+    public String toString(){
+        String reply = "This class deals with moving the GamePieces";
+        return reply;
     }
 
 }
