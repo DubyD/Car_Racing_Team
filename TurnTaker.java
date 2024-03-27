@@ -185,10 +185,11 @@ public class TurnTaker extends TimerTask implements ActionListener{
 
            }
 
-                //This will be the new positions of the contestants
-           this.gotham.setRacers(currentRacers);
+
 
        }
+            //This will be the new positions of the contestants
+        this.gotham.setRacers(currentRacers);
     }
 
 }
