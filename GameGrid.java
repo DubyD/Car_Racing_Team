@@ -47,10 +47,15 @@ public class GameGrid extends JPanel {
         this.updateLabels();
     }
 
+        //Zero parameter constructor to complete class
     public GameGrid(){
         this.size = -1;
         this.gotham = null;
+        this.labels = null;
+        this.movement = null;
+        this.gridPanel = null;
     }
+
 
     /** 
      * Updates the labels on the grid to reflect the current state of the game. 
@@ -76,5 +81,13 @@ public class GameGrid extends JPanel {
 
     public String[] getResults(){
         return this.gotham.getResults();
+    }
+
+        //toString method added to complete the class
+    @Override
+    public String toString(){
+        String reply = "This class handles turning the backend work into a user friendly experience.\n"+
+                       "Dealing with the visuals of where the game components are in the game space.";
+        return reply;
     }
 }
