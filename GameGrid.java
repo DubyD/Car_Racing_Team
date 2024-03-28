@@ -52,7 +52,6 @@ public class GameGrid extends JPanel {
         this.gotham = null;
     }
 
-
     /** 
      * Updates the labels on the grid to reflect the current state of the game. 
      */
@@ -64,7 +63,7 @@ public class GameGrid extends JPanel {
                 label.setText("");
                 for (GamePiece piece : board) {
                     if (piece.getX() == i && piece.getY() == j) {
-                        label.setText(label.getText() + piece.toString());
+                        label.setText(label.getText() + ',' + piece.toString());
                     }
                 }
             }
@@ -78,5 +77,4 @@ public class GameGrid extends JPanel {
     public String[] getResults(){
         return this.gotham.getResults();
     }
-
 }
