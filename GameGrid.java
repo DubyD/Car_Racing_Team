@@ -31,6 +31,8 @@ public class GameGrid {
                 this.labels[i][j] = label;
             }
         }
+
+        updateLabels();
     }
 
 
