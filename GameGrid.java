@@ -1,15 +1,19 @@
 // Author EL
 
+import java.awt.*;
 import java.util.List;
 
-import javax.swing.JLabel;
+import javax.swing.*;
 
-public class GameGrid {
+public class GameGrid extends JPanel {
 
     private JLabel[][] labels;
 
+    private JPanel gridPanel;
+
     private int size;
     private City gotham;
+    private TurnTaker movement;
 
     /** 
      * Constructor for GameGrid
@@ -17,22 +21,35 @@ public class GameGrid {
      * @param numRacers The number of racers in the game
      */
     public GameGrid(int size , int numRacers) {
+
         this.size = size;
         this.labels = new JLabel[size][size];
         this.gotham = new City(size, numRacers);
+        this.movement = new TurnTaker(this.gotham, this);
+        this.gridPanel = new JPanel(new GridLayout(size, size));
+
 
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 JLabel label = new JLabel();
 
-                // Code for Label properties
-                // ...
+                label.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+                label.setHorizontalAlignment(JLabel.CENTER);
+                label.setVerticalAlignment(JLabel.CENTER);
+                label.setPreferredSize(new Dimension(60, 20));
 
                 this.labels[i][j] = label;
+                gridPanel.add(label);
             }
         }
 
-        updateLabels();
+        this.add(gridPanel, BorderLayout.CENTER);
+        this.updateLabels();
+    }
+
+    public GameGrid(){
+        this.size = -1;
+        this.gotham = null;
     }
 
 
@@ -47,14 +64,19 @@ public class GameGrid {
                 label.setText("");
                 for (GamePiece piece : board) {
                     if (piece.getX() == i && piece.getY() == j) {
-                        label.setText(piece.toString());
+                        label.setText(label.getText() + piece.toString());
                     }
                 }
             }
         }
     }
 
-    public JLabel[][] getLabels() {
-        return this.labels;
+    public boolean getFinished(){
+        return this.gotham.getFinished();
     }
+
+    public String[] getResults(){
+        return this.gotham.getResults();
+    }
+
 }
