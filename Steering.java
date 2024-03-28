@@ -2,7 +2,7 @@
 
 //Author WD
 //GW fixed some bugs I found
-//EL fixed some grammatical errors
+//EL fixed some grammatical errors and toString() method
 
 public class Steering {
 
@@ -80,6 +80,7 @@ public class Steering {
     @Override
     public String toString(){
         String reply = "Handles all of the Directional methods/attributes of a car class"+
-                        "also handling the display of the car as well");
+                        "also handling the display of the car as well";
+        return reply;
     }
 }
