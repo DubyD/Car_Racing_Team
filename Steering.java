@@ -6,6 +6,9 @@
 //GW fixed some bugs I found
 //EL fixed some grammatical errors and toString() method
 
+import javax.swing.*;
+import java.net.URL;
+
 public class Steering {
 
     private char directionXY;
@@ -27,7 +30,6 @@ public class Steering {
         //Sets the initial look of a Car obj.
     public void setDisplay(String display){
         this.carNum = display;
-        this.display = "|" + carNum + "|";
     }
 
         //Sets which Axis this car is moving on.

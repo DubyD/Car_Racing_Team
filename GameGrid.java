@@ -2,6 +2,7 @@
 // Author EL
 
 import java.awt.*;
+import java.net.URL;
 import java.util.List;
 
 import javax.swing.*;
@@ -15,6 +16,7 @@ public class GameGrid extends JPanel {
     private int size;
     private City gotham;
     private TurnTaker movement;
+    private Icon carIcon;
 
     /** 
      * Constructor for GameGrid
@@ -28,6 +30,7 @@ public class GameGrid extends JPanel {
         this.gotham = new City(size, numRacers);
         this.movement = new TurnTaker(this.gotham, this);
         this.gridPanel = new JPanel(new GridLayout(size, size));
+        this.carIcon = null;
 
 
         for (int i = 0; i < size; i++) {
@@ -67,13 +70,35 @@ public class GameGrid extends JPanel {
             for (int j = 0; j < this.size; j++) {
                 JLabel label = this.labels[i][j];
                 label.setText("");
+                label.setIcon(null);
                 for (GamePiece piece : board) {
                     if (piece.getX() == i && piece.getY() == j) {
-                        label.setText(label.getText() + ' ' + piece.toString());
+                        if(piece.getClass().equals(Car.class)){
+                            label.setIcon (setImageDisplay(((Car) piece).getCarNum()));
+                        }else {
+                            label.setText(label.getText() + ' ' + piece.toString());
+                        }
                     }
                 }
             }
         }
+    }
+    public Icon setImageDisplay(String carNum){
+        int currCarNum = Integer.parseInt(carNum);
+        if(currCarNum == 1) {
+            URL car1URL = getClass().getResource("images/carEnlarged1.png"); //File location
+            carIcon = new ImageIcon(car1URL); //New icon using this url
+        } else if (currCarNum == 2) {
+            URL car2URL = getClass().getResource("images/carEnlarged2.png"); //File location
+            carIcon = new ImageIcon(car2URL); //New icon using this url
+        } else if (currCarNum == 3) {
+            URL car3URL = getClass().getResource("images/carEnlarged3.png"); //File location
+            carIcon = new ImageIcon(car3URL); //New icon using this url
+        }else{
+            URL car4URL = getClass().getResource("images/carEnlarged4.png"); //File location
+            carIcon = new ImageIcon(car4URL); //New icon using this url
+        }
+        return carIcon;
     }
 
     public boolean getFinished(){
