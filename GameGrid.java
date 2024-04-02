@@ -69,7 +69,7 @@ public class GameGrid extends JPanel {
                 label.setText("");
                 for (GamePiece piece : board) {
                     if (piece.getX() == i && piece.getY() == j) {
-                        label.setText(label.getText() + ',' + piece.toString());
+                        label.setText(label.getText() + ' ' + piece.toString());
                     }
                 }
             }
