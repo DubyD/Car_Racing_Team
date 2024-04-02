@@ -182,25 +182,25 @@ public class MenuGui extends JPanel{
         
         this.window.repaint();
     }
-        public void displayResults(){
+    public void displayResults(){
             //Start by clearing window of all elements
-            this.window.getContentPane().removeAll();
+        this.window.getContentPane().removeAll();
             //null layout for manual positioning
-            this.setLayout(null);
+        this.setLayout(null);
             //Array of JLabels for variable size of racers
-            JLabel[] resultsLabel = new JLabel[results.length];
-            for (int i = 0; i < results.length; i++) {
+        JLabel[] resultsLabel = new JLabel[results.length];
+        for (int i = 0; i < results.length; i++) {
                 //create new seperate JLabels from results array
-                resultsLabel[i] = new JLabel(results[i]);
-                resultsLabel[i].setBounds(300, 50 + (50 *i), 300, 100);
-                this.add(resultsLabel[i]);
-            }
+            resultsLabel[i] = new JLabel(results[i]);
+            resultsLabel[i].setBounds(300, 50 + (50 *i), 300, 100);
+            this.add(resultsLabel[i]);
+        }
             
             //OK button returns to menu
-            JButton OKButton = new JButton("Menu");
-            this.add(OKButton);
-            OKButton.setBounds((windowWidth/2)-100, 3*windowHeight/4, 150, 30);
-            OKButton.addActionListener((ActionEvent e)->{  
+        JButton OKButton = new JButton("Menu");
+        this.add(OKButton);
+        OKButton.setBounds((windowWidth/2)-100, 3*windowHeight/4, 150, 30);
+        OKButton.addActionListener((ActionEvent e)->{
             this.window.getContentPane().removeAll();
             titleScreen();
         });
@@ -211,26 +211,30 @@ public class MenuGui extends JPanel{
         this.window.setVisible(true);
         
         this.window.repaint();
-        }
+    }
         //return selected item in sizeSelection
-        public String getSelectedSizeItem(){
-            return (String) this.sizeSelection.getSelectedItem();
-        }
+    public String getSelectedSizeItem(){
+        return (String) this.sizeSelection.getSelectedItem();
+    }
         //return selected item in racerSelection
-        public String getSelectedRacingItem(){
-            return (String) this.racerSelection.getSelectedItem();
-        }
+    public String getSelectedRacingItem(){
+        return (String) this.racerSelection.getSelectedItem();
+    }
         //set results array
-        public void setResults(String[] str){
+
+    public void setResults(String[] str){
             this.results = str;
         }
         //public access so SceneSwitcher can set functionality of the button
-        public JButton getStartButton(){
+
+    public JButton getStartButton(){
             return this.startButton;
-        }
-        public String toString(){
-            return "This class creates and displays the main menu, allowing"
-                    + "for game customization and initiation. It also is used"
-                    + "to display results after a race is finished.";
-        }
+    }
+
+    @Override
+    public String toString(){
+        return "This class creates and displays the main menu, allowing"
+                + "for game customization and initiation. It also is used"
+                + "to display results after a race is finished.";
+    }
 }
