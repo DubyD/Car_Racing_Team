@@ -1,3 +1,4 @@
+
 // Author EL
 
 import java.awt.*;
@@ -81,6 +82,9 @@ public class GameGrid extends JPanel {
 
     public String[] getResults(){
         return this.gotham.getResults();
+    }
+    public City getGotham(){ //Added for GameScreenGUI functionality - AW
+        return gotham;
     }
 
         //toString method added to complete the class

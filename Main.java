@@ -1,3 +1,5 @@
+
+
 //Author VS
 import javax.swing.*;
 //Creates Main frame that displays the Application's "Main Menu's" panel.
