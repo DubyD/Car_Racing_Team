@@ -55,8 +55,10 @@ public class GameScreenGui extends JPanel {
         return this.gameGrid.getFinished();
     }
 
+        //Added to complete the class
     @Override
     public String toString(){
-        String reply = "This acts like an outer shell holding the "
+        String reply = "This acts like an outer shell holding the game";
+        return reply;
     }
 }
