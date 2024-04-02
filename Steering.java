@@ -1,7 +1,7 @@
 
 //Author WD
 //GW fixed some bugs I found
-//EL fixed some grammatical errors and toString() method
+//EL fixed grammatical errors, added toString() method, and documentation
 
 public class Steering {
 
