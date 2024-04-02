@@ -37,7 +37,7 @@ public class GameGrid extends JPanel {
                 label.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
                 label.setHorizontalAlignment(JLabel.CENTER);
                 label.setVerticalAlignment(JLabel.CENTER);
-                label.setPreferredSize(new Dimension(60, 20));
+                label.setPreferredSize(new Dimension(100, 60));
 
                 this.labels[i][j] = label;
                 gridPanel.add(label);

@@ -32,6 +32,12 @@ public class GameScreenGui extends JPanel {
         this.setVisible(true);
     }
 
+        //Non-parameter constructor to complete this class
+    public GameScreenGui(){
+        this.gameGrid = null;
+        this.endGameButton = null;
+    }
+
     public JButton getEndButton(){
         return this.endGameButton;
     }
@@ -49,5 +55,8 @@ public class GameScreenGui extends JPanel {
         return this.gameGrid.getFinished();
     }
 
-    
+    @Override
+    public String toString(){
+        String reply = "This acts like an outer shell holding the "
+    }
 }
