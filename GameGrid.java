@@ -80,9 +80,6 @@ public class GameGrid extends JPanel {
         return this.gotham.getFinished();
     }
 
-    public String[] getResults(){
-        return this.gotham.getResults();
-    }
     public City getGotham(){ //Added for GameScreenGUI functionality - AW
         return gotham;
     }

@@ -19,23 +19,23 @@ import javax.swing.JPanel;
 
 public class MenuGui extends JPanel{
 
-    JLabel instructions;
-    JButton startButton;
-    JComboBox<String> sizeSelection;
-    JComboBox<String> racerSelection;
-    int windowHeight;
-    int windowWidth;
-    JFrame window;
-    String[] results;
+    private JLabel instructions;
+    private JButton startButton;
+    private JComboBox<String> sizeSelection;
+    private JComboBox<String> racerSelection;
+    private int windowHeight;
+    private int windowWidth;
+    private JFrame window;
+    private String[] results;
 
     public MenuGui(JFrame frame){
-        instructions = new JLabel();
+        this.instructions = new JLabel();
         
-        windowHeight = frame.getHeight();
-        windowWidth = frame.getWidth();
+        this.windowHeight = frame.getHeight();
+        this.windowWidth = frame.getWidth();
         this.window = frame;
-        startButton = new JButton("Start");
-        startButton.setBounds((windowWidth/2)-200, 3*windowHeight/4, 150, 30);
+        this.startButton = new JButton("Start");
+        this.startButton.setBounds((windowWidth/2)-200, 3*windowHeight/4, 150, 30);
     }
 
     /** 
@@ -108,25 +108,25 @@ public class MenuGui extends JPanel{
         JLabel sizeText = new JLabel("Size");
         sizeText.setBounds((windowWidth/2)-230, (3*windowHeight/5), 150, 30);
         //Initialize drop down with 4 options
-        sizeSelection = new JComboBox<>();
-        sizeSelection.addItem("4");
-        sizeSelection.addItem("5");
-        sizeSelection.addItem("6");
-        sizeSelection.addItem("7");
+        this.sizeSelection = new JComboBox<>();
+        this.sizeSelection.addItem("4");
+        this.sizeSelection.addItem("5");
+        this.sizeSelection.addItem("6");
+        this.sizeSelection.addItem("7");
         //set position under text
-        sizeSelection.setBounds((windowWidth/2)-200, 3*windowHeight/5, 150, 30);
+        this.sizeSelection.setBounds((windowWidth/2)-200, 3*windowHeight/5, 150, 30);
         
         //Labeling the JComboBox
         JLabel racerText = new JLabel("Racers");
         racerText.setBounds((windowWidth/2), (3*windowHeight/5), 100, 30);
         //Initialize drop down with 4 options
-        racerSelection = new JComboBox<>();
-        racerSelection.addItem("1");
-        racerSelection.addItem("2");
-        racerSelection.addItem("3");
-        racerSelection.addItem("4");
+        this.racerSelection = new JComboBox<>();
+        this.racerSelection.addItem("1");
+        this.racerSelection.addItem("2");
+        this.racerSelection.addItem("3");
+        this.racerSelection.addItem("4");
         //Every time this drop down is interacted with, visibility on car graphics is updated
-        racerSelection.addActionListener((ActionEvent e)->{
+        this.racerSelection.addActionListener((ActionEvent e)->{
             switch(racerSelection.getSelectedIndex()){
                 case 0:
                         car1Label.setVisible(true);
@@ -167,7 +167,7 @@ public class MenuGui extends JPanel{
         });
         
         //set position under text
-        racerSelection.setBounds(50+(windowWidth/2), 3*windowHeight/5, 100, 30);
+        this.racerSelection.setBounds(50+(windowWidth/2), 3*windowHeight/5, 100, 30);
         
         //Allows manual positioning
         this.setLayout(null);
@@ -185,9 +185,9 @@ public class MenuGui extends JPanel{
         
         //Making sure JPanel is visible
         this.setVisible(true);
-        window.setVisible(true);
+        this.window.setVisible(true);
         
-        window.repaint();
+        this.window.repaint();
     }
 
     /** 
@@ -221,7 +221,7 @@ public class MenuGui extends JPanel{
             
         //ensure both frame and panel are visible
         this.setVisible(true);
-        window.setVisible(true);
+        this.window.setVisible(true);
         
         window.repaint();
     }
