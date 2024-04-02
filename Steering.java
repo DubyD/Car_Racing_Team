@@ -1,10 +1,7 @@
 
-
-
-
 //Author WD
 //GW fixed some bugs I found
-//EL fixed some grammatical errors and toString() method
+//EL fixed grammatical errors, added toString() method, and documentation
 
 public class Steering {
 
@@ -22,6 +19,39 @@ public class Steering {
         this.directionXY = ' ';
         this.carNum = "0";
     }
+
+    /**
+     * This method returns the display of the car with the direction it is moving in
+     * @return String
+     */
+    public String getDisplay(){
+
+        String reply = this.display;
+        if(this.directionXY == 'Y'){
+            if(this.direction > 0){
+                reply = reply + ">";
+            }else {
+                reply = "<" + reply;
+            }
+        }else if(this.directionXY == 'X'){
+            if(this.direction > 0){
+                reply = reply + "\nv";
+            }else {
+                reply = "^\n" + reply;
+            }
+        }
+        return reply;
+    }
+
+    /**
+     * This method resets the direction of the car to 0 and the directionXY to ' '
+     * @return void
+     */
+    public void stop(){
+        this.directionXY = ' ';
+        this.direction = 0;
+    }
+
 //-------------------------------Setters-----------------------------------------------------
 
         //Sets the initial look of a Car obj.
@@ -41,6 +71,11 @@ public class Steering {
     public void setDirection(int num){
         this.direction = num;
     }
+
+    public void setCarNum(String carNum) {
+        this.carNum = carNum;
+    }
+
     //-------------------------------Getters-------------------------------------------------
 
         //gets which axis it's moving on
@@ -48,34 +83,17 @@ public class Steering {
         return this.directionXY;
     }
 
-    public void stop(){
-        this.directionXY = ' ';
-        this.direction = 0;
+    public char getDirectionXY() {
+        return this.directionXY;
+    }
+
+
+    public String getCarNum() {
+        return this.carNum;
     }
 
     public int getDirection(){
         return this.direction;
-    }
-
-
-        //Sets up the String to simulate Movement or lack of movement
-    public String getDisplay(){
-
-        String reply = this.display;
-        if(this.directionXY == 'Y'){
-            if(this.direction > 0){
-                reply = reply + ">";
-            }else {
-                reply = "<" + reply;
-            }
-        }else if(this.directionXY == 'X'){
-            if(this.direction > 0){
-                reply = reply + "\nv";
-            }else {
-                reply = "^\n" + reply;
-            }
-        }
-        return reply;
     }
 
         //Added to complete this as a java class

@@ -1,9 +1,6 @@
 
-
-
-
 //Author WD
-//EL fixed some grammatical errors
+//EL made multiple changes to the class
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.Timer;
 import java.util.TimerTask;
-
 
 public class TurnTaker extends TimerTask implements ActionListener{
 
@@ -49,26 +45,25 @@ public class TurnTaker extends TimerTask implements ActionListener{
         this.clock = null;
         this.guiUpdater = null;
     }
-
-
-        //Used to export which turn it to update
-        //a label of which turn it is
-    public int getTurns(){
-        return this.turns;
-    }
-
-        //Edits the ActionListener instructions
+    
+    /**
+     * This method is used to listen for an action event
+     * @param e The action event
+     */
     @Override
     public void actionPerformed(ActionEvent e){this.run();}
 
-        //Initiates the movement in the program
+    /**
+     * Initiates the movement in the program
+     * @return void
+     */
     @Override
     public void run(){
 
             //Every time the Timer goes off this increments by 1
         this.turns = this.turns + 1;
 
-        this.startGame();
+        this.startTurn();
 
             //Used to check if the timer needs to stop
         boolean gameOver = true;
@@ -100,11 +95,13 @@ public class TurnTaker extends TimerTask implements ActionListener{
 
     }
 
-        //Exports whether the game is over
-        //or not to Activate the end button
-    public boolean getFinished(){return this.finished;}
-
-    private void startGame(){
+    /**
+     * This method is used to move the cars in the game
+     * It will move the cars in the game based on their speed
+     * and if they have reached their destination
+     * @return void
+     */
+    private void startTurn(){
 
             //New List to populate Gotham
         List<Car> currentRacers = new ArrayList<Car>();
@@ -194,11 +191,54 @@ public class TurnTaker extends TimerTask implements ActionListener{
         this.gotham.setRacers(currentRacers);
     }
 
+    public City getGotham() {
+        return this.gotham;
+    }
+
+    public void setGotham(City gotham) {
+        this.gotham = gotham;
+    }
+
+    public GameGrid getGuiUpdater() {
+        return this.guiUpdater;
+    }
+
+    public void setGuiUpdater(GameGrid guiUpdater) {
+        this.guiUpdater = guiUpdater;
+    }
+
+    public boolean isFinished() {
+        return this.finished;
+    }
+
+    public boolean getFinished() {
+        return this.finished;
+    }
+
+    public void setFinished(boolean finished) {
+        this.finished = finished;
+    }
+
+    public int getTurns(){
+        return this.turns;
+    }
+
+    public void setTurns(int turns) {
+        this.turns = turns;
+    }
+
+    public Timer getClock() {
+        return this.clock;
+    }
+
+    public void setClock(Timer clock) {
+        this.clock = clock;
+    }
+
         //To complete the class I added a toString method
     @Override
     public String toString(){
         String reply = "This class deals with moving the GamePieces";
         return reply;
     }
-
 }
