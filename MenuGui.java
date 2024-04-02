@@ -5,6 +5,8 @@
 //for game customization and initiation. It also is used
 //to display results after a race is finished.
 
+//EL fixed formatting, added class documentation, and getters and setters
+
 import java.awt.event.ActionEvent;
 import java.net.URL;
 import javax.swing.Icon;
@@ -15,27 +17,32 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-
-
 public class MenuGui extends JPanel{
-    JLabel instructions;
-    JButton startButton;
-    JComboBox<String> sizeSelection;
-    JComboBox<String> racerSelection;
-    int windowHeight;
-    int windowWidth;
-    JFrame window;
-    String[] results;
+
+    private JLabel instructions;
+    private JButton startButton;
+    private JComboBox<String> sizeSelection;
+    private JComboBox<String> racerSelection;
+    private int windowHeight;
+    private int windowWidth;
+    private JFrame window;
+    private String[] results;
+
     public MenuGui(JFrame frame){
-        instructions = new JLabel();
+        this.instructions = new JLabel();
         
-        windowHeight = frame.getHeight();
-        windowWidth = frame.getWidth();
+        this.windowHeight = frame.getHeight();
+        this.windowWidth = frame.getWidth();
         this.window = frame;
-        startButton = new JButton("Start");
-        startButton.setBounds((windowWidth/2)-200, 3*windowHeight/4, 150, 30);
+        this.startButton = new JButton("Start");
+        this.startButton.setBounds((windowWidth/2)-200, 3*windowHeight/4, 150, 30);
     }
 
+    /** 
+     * This method creates the main menu screen, allowing for customization
+     * and initiation of the simulation.
+     * @return void
+    */
     public void titleScreen(){
         //Exit button simply exits the game
         JButton exitButton = new JButton("Exit");
@@ -46,11 +53,11 @@ public class MenuGui extends JPanel{
         exitButton.setBounds(50+(windowWidth/2), 3*windowHeight/4, 100, 30);
         
         //instructions text, set to be on right side of frame
-        //HTML formatting to create automatic linebreaks
+        //HTML formatting to create automatic line breaks
         instructions.setBounds(520, 0, 300, 500);
         instructions.setText("<html>Welcome to the Racing Game!<br/>Choose the size of the square racing grid"+""
                 + "<br/> and the number of racers. <br/>"
-                + "By Will Duby, Victor Serra, Eric L., and <br/>Gus Warmington</html>");
+                + "By Will Duby, Victor Serra, Eric Lim, and <br/>Gus Warmington</html>");
         this.add(instructions);
         
         //Load all car images
@@ -101,25 +108,25 @@ public class MenuGui extends JPanel{
         JLabel sizeText = new JLabel("Size");
         sizeText.setBounds((windowWidth/2)-230, (3*windowHeight/5), 150, 30);
         //Initialize drop down with 4 options
-        sizeSelection = new JComboBox<>();
-        sizeSelection.addItem("4");
-        sizeSelection.addItem("5");
-        sizeSelection.addItem("6");
-        sizeSelection.addItem("7");
+        this.sizeSelection = new JComboBox<>();
+        this.sizeSelection.addItem("4");
+        this.sizeSelection.addItem("5");
+        this.sizeSelection.addItem("6");
+        this.sizeSelection.addItem("7");
         //set position under text
-        sizeSelection.setBounds((windowWidth/2)-200, 3*windowHeight/5, 150, 30);
+        this.sizeSelection.setBounds((windowWidth/2)-200, 3*windowHeight/5, 150, 30);
         
         //Labeling the JComboBox
         JLabel racerText = new JLabel("Racers");
         racerText.setBounds((windowWidth/2), (3*windowHeight/5), 100, 30);
         //Initialize drop down with 4 options
-        racerSelection = new JComboBox<>();
-        racerSelection.addItem("1");
-        racerSelection.addItem("2");
-        racerSelection.addItem("3");
-        racerSelection.addItem("4");
+        this.racerSelection = new JComboBox<>();
+        this.racerSelection.addItem("1");
+        this.racerSelection.addItem("2");
+        this.racerSelection.addItem("3");
+        this.racerSelection.addItem("4");
         //Every time this drop down is interacted with, visibility on car graphics is updated
-        racerSelection.addActionListener((ActionEvent e)->{
+        this.racerSelection.addActionListener((ActionEvent e)->{
             switch(racerSelection.getSelectedIndex()){
                 case 0:
                         car1Label.setVisible(true);
@@ -160,7 +167,7 @@ public class MenuGui extends JPanel{
         });
         
         //set position under text
-        racerSelection.setBounds(50+(windowWidth/2), 3*windowHeight/5, 100, 30);
+        this.racerSelection.setBounds(50+(windowWidth/2), 3*windowHeight/5, 100, 30);
         
         //Allows manual positioning
         this.setLayout(null);
@@ -178,59 +185,123 @@ public class MenuGui extends JPanel{
         
         //Making sure JPanel is visible
         this.setVisible(true);
-        window.setVisible(true);
+        this.window.setVisible(true);
         
-        window.repaint();
+        this.window.repaint();
     }
-        public void displayResults(){
-            //Start by clearing window of all elements
-            window.getContentPane().removeAll();
-            //null layout for manual positioning
-            this.setLayout(null);
-            //Array of JLabels for variable size of racers
-            JLabel[] resultsLabel = new JLabel[results.length];
+
+    /** 
+     * This method displays the results
+     * @return void
+     */
+    
+    public void displayResults(){
+
+        //Start by clearing window of all elements
+        window.getContentPane().removeAll();
+        //null layout for manual positioning
+        this.setLayout(null);
+        //Array of JLabels for variable size of racers
+        JLabel[] resultsLabel = new JLabel[results.length];
+
         for (int i = 0; i < results.length; i++) {
-            //create new seperate JLabels from results array
+            //create new separate JLabels from results array
             resultsLabel[i] = new JLabel(results[i]);
             resultsLabel[i].setBounds(300, 50 + (50 *i), 300, 100);
             this.add(resultsLabel[i]);
         }
             
-            //OK button returns to menu
-            JButton OKButton = new JButton("Menu");
-            this.add(OKButton);
-            OKButton.setBounds((windowWidth/2)-100, 3*windowHeight/4, 150, 30);
-            OKButton.addActionListener((ActionEvent e)->{  
+        //OK button returns to menu
+        JButton OKButton = new JButton("Menu");
+        this.add(OKButton);
+        OKButton.setBounds((windowWidth/2)-100, 3*windowHeight/4, 150, 30);
+        OKButton.addActionListener((ActionEvent e)->{  
             window.getContentPane().removeAll();    
             titleScreen();
         });
             
-        
         //ensure both frame and panel are visible
         this.setVisible(true);
-        window.setVisible(true);
+        this.window.setVisible(true);
         
         window.repaint();
-        }
-        //return selected item in sizeSelection
-        public String getSelectedSizeItem(){
-            return (String) sizeSelection.getSelectedItem();
-        }
-        //return selected item in racerSelection
-        public String getSelectedRacingItem(){
-            return (String) racerSelection.getSelectedItem();
-        }
-        //set results array
-        public void setResults(String[] str){
-            results = str;
-        }
-        //public access so SceneSwitcher can set functionality of the button
-        public JButton getStartButton(){
-            return startButton;
-        }
-        public String toString(){
-            return "This class creates and displays the main menu, allowing"
-                    + "for game customization and initiation. It also is used"
-                    + "to display results after a race is finished.";
-        }
+    }
+
+    //return selected item in sizeSelection
+    public String getSelectedSizeItem(){
+        return (String) sizeSelection.getSelectedItem();
+    }
+
+    //return selected item in racerSelection
+    public String getSelectedRacingItem(){
+        return (String) racerSelection.getSelectedItem();
+    }
+
+    //set results array
+    public void setResults(String[] str){
+        results = str;
+    }
+
+    public JLabel getInstructions() {
+        return this.instructions;
+    }
+
+    public void setInstructions(JLabel instructions) {
+        this.instructions = instructions;
+    }
+    
+    //public access so SceneSwitcher can set functionality of the button
+    public JButton getStartButton(){
+        return startButton;
+    }
+
+    public JComboBox<String> getSizeSelection() {
+        return this.sizeSelection;
+    }
+
+    public void setSizeSelection(JComboBox<String> sizeSelection) {
+        this.sizeSelection = sizeSelection;
+    }
+
+    public JComboBox<String> getRacerSelection() {
+        return this.racerSelection;
+    }
+
+    public void setRacerSelection(JComboBox<String> racerSelection) {
+        this.racerSelection = racerSelection;
+    }
+
+    public int getWindowHeight() {
+        return this.windowHeight;
+    }
+
+    public void setWindowHeight(int windowHeight) {
+        this.windowHeight = windowHeight;
+    }
+
+    public int getWindowWidth() {
+        return this.windowWidth;
+    }
+
+    public void setWindowWidth(int windowWidth) {
+        this.windowWidth = windowWidth;
+    }
+
+    public JFrame getWindow() {
+        return this.window;
+    }
+
+    public void setWindow(JFrame window) {
+        this.window = window;
+    }
+
+    public String[] getResults() {
+        return this.results;
+    }
+
+    public String toString(){
+        return "This class creates and displays the main menu, allowing"
+                + "for game customization and initiation. It also is used"
+                + "to display results after a race is finished.";
+    }
 }
