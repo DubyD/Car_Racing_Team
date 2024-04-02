@@ -12,7 +12,7 @@ the winner based on the fastest completion time.
 3. Run the `Main` class.
 
 ### UML Design:
-<img src="[https://github.com/DubyD/Car_Racing_Team/assets/145795080/927005c5-b700-485c-a4fe-014bc31332b9](https://github.com/DubyD/Car_Racing_Team/blob/main/images/Race_cars_Team(2).jpg)" width="800">
+<img src="https://github.com/DubyD/Car_Racing_Team/blob/main/images/Race_cars_Team(2).jpg" width="800">
 
 ### Contributors:
 - [Will Duby](https://github.com/DubyD)
