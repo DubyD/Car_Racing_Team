@@ -37,7 +37,15 @@ public class SceneSwitcher {
         //Initiates the menu first
         this.frame.setContentPane(menuScreen);
         this.frame.setVisible(true);
-        menuScreen.titleScreen();
+        this.menuScreen.titleScreen();
+    }
+
+        //Parameterless constructor
+    public SceneSwitcher(){
+        this.frame = null;
+        this.gamePanel = null;
+        this.menuScreen = null;
+        this.gameScreen = null;
     }
 
     //This method is called when the StartButton is pressed and adds a function to the EndButton.
@@ -58,7 +66,7 @@ public class SceneSwitcher {
         //Sets up the Game Screen
         this.gamePanel = new JPanel();
         this.gamePanel.setLayout(new BorderLayout());
-        this.gamePanel.add(gameScreen, BorderLayout.CENTER);
+        this.gamePanel.add(this.gameScreen, BorderLayout.CENTER);
 
         this.frame.setContentPane(gamePanel);
         this.frame.revalidate();
@@ -68,6 +76,12 @@ public class SceneSwitcher {
     private void showMenu() {
         this.frame.setContentPane(this.menuScreen);
         this.frame.revalidate();
-        menuScreen.displayResults();
+        this.menuScreen.displayResults();
+    }
+    
+    @Override
+    public String toString(){
+        String reply = "This class handles switching between the Main Menu and the game";
+        return reply;
     }
 }

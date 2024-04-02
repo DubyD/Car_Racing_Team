@@ -182,6 +182,7 @@ public class MenuGui extends JPanel{
         
         this.window.repaint();
     }
+
     public void displayResults(){
             //Start by clearing window of all elements
         this.window.getContentPane().removeAll();
