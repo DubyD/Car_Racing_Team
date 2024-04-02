@@ -62,13 +62,13 @@ public class Steering {
     public String getDisplay(){
 
         String reply = this.display;
-        if(this.directionXY == 'X'){
+        if(this.directionXY == 'Y'){
             if(this.direction > 0){
                 reply = reply + ">";
             }else {
                 reply = "<" + reply;
             }
-        }else if(this.directionXY == 'Y'){
+        }else if(this.directionXY == 'X'){
             if(this.direction > 0){
                 reply = reply + "\nv";
             }else {
