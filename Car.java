@@ -7,6 +7,7 @@
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -375,5 +376,29 @@ public class Car extends GamePiece implements Cloneable{
         nextCar.setDisplay();
 
         return nextCar;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        Car car = (Car) o;
+
+        if (finished != car.finished) return false;
+        if (!Objects.equals(engine, car.engine)) return false;
+        if (!Objects.equals(wheel, car.wheel)) return false;
+        return Objects.equals(carNum, car.carNum);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (engine != null ? engine.hashCode() : 0);
+        result = 31 * result + (wheel != null ? wheel.hashCode() : 0);
+        result = 31 * result + (finished ? 1 : 0);
+        result = 31 * result + (carNum != null ? carNum.hashCode() : 0);
+        return result;
     }
 }

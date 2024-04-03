@@ -79,4 +79,19 @@ public class Motor{
         String reply = "This handles all of the speed functionality of the Car obj.";
         return reply;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Motor motor = (Motor) o;
+
+        return speed == motor.speed;
+    }
+
+    @Override
+    public int hashCode() {
+        return speed;
+    }
 }

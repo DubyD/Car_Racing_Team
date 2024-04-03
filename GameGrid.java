@@ -1,5 +1,6 @@
 
 // Author EL
+// Contributions by VS in updateLabel and setImageDisplay
 
 import java.awt.*;
 import java.net.URL;
@@ -60,7 +61,7 @@ public class GameGrid extends JPanel {
 
 
     /** 
-     * Updates the labels on the grid to reflect the current state of the game. 
+     * Updates the labels on the grid to reflect the current state of the game.
      * @return void
      */
     public void updateLabels() {

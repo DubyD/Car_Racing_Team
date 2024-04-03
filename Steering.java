@@ -3,6 +3,8 @@
 //GW fixed some bugs I found
 //EL fixed grammatical errors, added toString() method, and documentation
 
+import java.util.Objects;
+
 public class Steering {
 
     private char directionXY;
@@ -101,5 +103,27 @@ public class Steering {
         String reply = "Handles all of the Directional methods/attributes of a car class"+
                         "also handling the display of the car as well";
         return reply;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Steering steering = (Steering) o;
+
+        if (directionXY != steering.directionXY) return false;
+        if (direction != steering.direction) return false;
+        if (!Objects.equals(display, steering.display)) return false;
+        return Objects.equals(carNum, steering.carNum);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = directionXY;
+        result = 31 * result + direction;
+        result = 31 * result + (display != null ? display.hashCode() : 0);
+        result = 31 * result + (carNum != null ? carNum.hashCode() : 0);
+        return result;
     }
 }

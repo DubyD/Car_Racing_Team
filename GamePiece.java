@@ -2,6 +2,8 @@
 //Author WD
 //EL fixed some grammatical errors
 
+import java.util.Objects;
+
 public class GamePiece {
 
         //Every game piece has coordinates
@@ -51,5 +53,25 @@ public class GamePiece {
     @Override
     public String toString(){
         return this.display;
+    }
+    //Equals Method
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        GamePiece gamePiece = (GamePiece) o;
+
+        if (x != gamePiece.x) return false;
+        if (y != gamePiece.y) return false;
+        return Objects.equals(display, gamePiece.display);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = x;
+        result = 31 * result + y;
+        result = 31 * result + (display != null ? display.hashCode() : 0);
+        return result;
     }
 }
