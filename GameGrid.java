@@ -86,7 +86,7 @@ public class GameGrid extends JPanel {
     /**
      * Sets the image of the car based on the car number
      * @param carNum
-     * @return
+     * @return Icon
      */
     public Icon setImageDisplay(String carNum){
         int currCarNum = Integer.parseInt(carNum);
