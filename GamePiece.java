@@ -1,11 +1,9 @@
 
-
-
-
 //Author WD
 //EL fixed some grammatical errors
 
 public class GamePiece {
+
         //Every game piece has coordinates
     protected int x;
     protected int y;
@@ -30,6 +28,7 @@ public class GamePiece {
     }
 
     //--------Getters----------------------------------------------------
+
         //Returns X coordinates
     public int getX(){
         return this.x;
@@ -41,9 +40,7 @@ public class GamePiece {
 
     //checks if this object is solid
 
-
     //--------Setters----------------------------------------------------
-
 
         //Setting the String
     public void setDisplay(String display){

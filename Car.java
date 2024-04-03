@@ -3,7 +3,7 @@
 
 //Author WD
 //3-23 AW fixed some bugs I found
-//EL fixed some grammatical errors
+//EL fixed grammatical errors and added documentation
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +30,6 @@ public class Car extends GamePiece implements Cloneable{
     private String carNum;
         //How long did it take to finish
     private int time;
-
 
     //Constructor of class
     public Car(int x, int y, String carNum) {
@@ -61,8 +60,6 @@ public class Car extends GamePiece implements Cloneable{
 
     //Parameter free constructor to complete the class
     public Car() {
-
-
         super(-1, -1);
 
         this.prevSpot = null;
@@ -75,23 +72,33 @@ public class Car extends GamePiece implements Cloneable{
         this.time = -1;
     }
 
-
-
 //--------------------------------------------Private Methods--------------------------------------
 
     //-------------------------------Destination Methods-------------------------------------------
+
+    /**
+     * Used to get the current destination
+     * @return Destination
+     */
     private Destination getCurrentDestination(){
         return this.map.get(0);
     }
 
-        //Used to determine whether to turn or not
+    /**
+     * Used to determine whether to turn or not
+     * @return boolean
+     */
     private boolean atDestinationY(){
         if((this.getY() - this.getCurrentDestination().getY()) == 0){
             return true;
         }
         return false;
     }
-        //Used to determine whether to turn or not
+
+    /**
+     * Used to determine whether to turn or not
+     * @return boolean
+     */
     private boolean atDestinationX(){
         if((this.getX() - this.getCurrentDestination().getX()) == 0){
             return true;
@@ -99,8 +106,11 @@ public class Car extends GamePiece implements Cloneable{
         return false;
     }
 
-        //Checks to see if the Car has made it to the Destination
-            //AW - changed method to public so it could be accessed from TurnTaker() in startGame()
+        //AW - changed method to public so it could be accessed from TurnTaker() in startGame()
+    /**
+     * This method is used to check if the car has reached it's destination
+     * @return boolean
+     */
     public boolean gotThere(){
         if(this.atDestinationX() && this.atDestinationY()){
             this.getNextDestination();
@@ -109,7 +119,10 @@ public class Car extends GamePiece implements Cloneable{
         return false;
     }
 
-        //Used to stamp passport with destinations
+    /**
+     * This method is used to stamp the passport with the destination
+     * @return void
+     */
     private void getNextDestination(){
         this.passport.add(this.map.get(0).getToken());
         this.map.remove(0);
@@ -205,15 +218,20 @@ public class Car extends GamePiece implements Cloneable{
 
 //-------------------------Exotic Public Methods---------------------------------------------------
 
-
-    //Gets the car moving
+    /**
+     * This method is used to get the car moving
+     * @return void
+     */
     public void revEngine() {
         this.engine.setSpeed();
     }
 
-
-        //used if vehicle stops at a Destination and needs to initiate movement
-        //Also used if the Vehicle needs to turn
+    /**
+     * This method is used to start the movement of the car
+     * Used if vehicle stops at a Destination and needs to initiate movement
+     * Also used if the Vehicle needs to turn
+     * @return Car
+     */
     public Car startMove(){
 
             //Escapes the loop
@@ -310,10 +328,12 @@ public class Car extends GamePiece implements Cloneable{
 
         return nextCar;
     }
-
-
-        //used to move a moving Car
-        //if moving the Car cannot be finished
+    
+    /**
+     * This method is used to keep the car moving
+     * If the car is moving it cannot be finished
+     * @return Car
+     */
     public Car keepMove(){
 
         int nextX = this.getX();
@@ -356,11 +376,4 @@ public class Car extends GamePiece implements Cloneable{
 
         return nextCar;
     }
-
-        //The display is in the base class, set by steering due to directions
-        //affecting the display
-    /*
-    private void display(String display) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }*/
 }

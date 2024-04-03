@@ -9,7 +9,6 @@ public class Destination extends GamePiece{
 
     private String token;
 
-
     public Destination(int x, int y, String display){
 
         //Setting up base class coordinates,
@@ -26,9 +25,15 @@ public class Destination extends GamePiece{
         this.token = " ";
     }
 
+    //-------------------------------Setters-----------------------------------------------------
+
+    public void setToken(String token){
+        this.token = token;
+    }
+
+    //-------------------------------Getters-----------------------------------------------------
 
     public String getToken(){
         return this.token;
     }
-
 }

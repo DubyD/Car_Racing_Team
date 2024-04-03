@@ -194,7 +194,6 @@ public class MenuGui extends JPanel{
      * This method displays the results
      * @return void
      */
-    
     public void displayResults(){
 
         //Start by clearing window of all elements
@@ -227,6 +226,39 @@ public class MenuGui extends JPanel{
         window.repaint();
     }
 
+    //-------------------------------Setters-----------------------------------------------------
+
+    //set results array
+    public void setResults(String[] str){
+        results = str;
+    }
+
+    public void setInstructions(JLabel instructions) {
+        this.instructions = instructions;
+    }
+
+    public void setSizeSelection(JComboBox<String> sizeSelection) {
+        this.sizeSelection = sizeSelection;
+    }
+
+    public void setRacerSelection(JComboBox<String> racerSelection) {
+        this.racerSelection = racerSelection;
+    }
+
+    public void setWindowHeight(int windowHeight) {
+        this.windowHeight = windowHeight;
+    }
+
+    public void setWindowWidth(int windowWidth) {
+        this.windowWidth = windowWidth;
+    }
+
+    public void setWindow(JFrame window) {
+        this.window = window;
+    }
+
+    //-------------------------------Getters-----------------------------------------------------
+
     //return selected item in sizeSelection
     public String getSelectedSizeItem(){
         return (String) sizeSelection.getSelectedItem();
@@ -237,17 +269,8 @@ public class MenuGui extends JPanel{
         return (String) racerSelection.getSelectedItem();
     }
 
-    //set results array
-    public void setResults(String[] str){
-        results = str;
-    }
-
     public JLabel getInstructions() {
         return this.instructions;
-    }
-
-    public void setInstructions(JLabel instructions) {
-        this.instructions = instructions;
     }
     
     //public access so SceneSwitcher can set functionality of the button
@@ -259,40 +282,20 @@ public class MenuGui extends JPanel{
         return this.sizeSelection;
     }
 
-    public void setSizeSelection(JComboBox<String> sizeSelection) {
-        this.sizeSelection = sizeSelection;
-    }
-
     public JComboBox<String> getRacerSelection() {
         return this.racerSelection;
-    }
-
-    public void setRacerSelection(JComboBox<String> racerSelection) {
-        this.racerSelection = racerSelection;
     }
 
     public int getWindowHeight() {
         return this.windowHeight;
     }
 
-    public void setWindowHeight(int windowHeight) {
-        this.windowHeight = windowHeight;
-    }
-
     public int getWindowWidth() {
         return this.windowWidth;
     }
 
-    public void setWindowWidth(int windowWidth) {
-        this.windowWidth = windowWidth;
-    }
-
     public JFrame getWindow() {
         return this.window;
-    }
-
-    public void setWindow(JFrame window) {
-        this.window = window;
     }
 
     public String[] getResults() {

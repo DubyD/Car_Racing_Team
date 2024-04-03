@@ -1,7 +1,9 @@
 
 
 //Author VS
+
 import javax.swing.*;
+
 //Creates Main frame that displays the Application's "Main Menu's" panel.
 public class Main {
     public static void main(String[] args) {
@@ -10,7 +12,7 @@ public class Main {
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setSize(800, 600);
 
-            SceneSwitcher sceneSwitcher = new SceneSwitcher(frame);
+            new SceneSwitcher(frame);
 
             frame.setLocationRelativeTo(null);
             frame.setVisible(true);

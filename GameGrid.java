@@ -15,7 +15,6 @@ public class GameGrid extends JPanel {
 
     private int size;
     private City gotham;
-    private TurnTaker movement;
     private Icon carIcon;
 
     /** 
@@ -28,10 +27,10 @@ public class GameGrid extends JPanel {
         this.size = size;
         this.labels = new JLabel[size][size];
         this.gotham = new City(size, numRacers);
-        this.movement = new TurnTaker(this.gotham, this);
         this.gridPanel = new JPanel(new GridLayout(size, size));
         this.carIcon = null;
 
+        new TurnTaker(this.gotham, this);
 
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
@@ -56,13 +55,13 @@ public class GameGrid extends JPanel {
         this.size = -1;
         this.gotham = null;
         this.labels = null;
-        this.movement = null;
         this.gridPanel = null;
     }
 
 
     /** 
      * Updates the labels on the grid to reflect the current state of the game. 
+     * @return void
      */
     public void updateLabels() {
         List<GamePiece> board = this.gotham.getBoard();
@@ -83,6 +82,12 @@ public class GameGrid extends JPanel {
             }
         }
     }
+
+    /**
+     * Sets the image of the car based on the car number
+     * @param carNum
+     * @return
+     */
     public Icon setImageDisplay(String carNum){
         int currCarNum = Integer.parseInt(carNum);
         if(currCarNum == 1) {
@@ -101,6 +106,14 @@ public class GameGrid extends JPanel {
         return carIcon;
     }
 
+    //-------------------------------Setters-----------------------------------------------------
+
+    public void setGotham(City gotham){
+        this.gotham = gotham;
+    }
+
+    //-------------------------------Getters-----------------------------------------------------
+    
     public boolean getFinished(){
         return this.gotham.getFinished();
     }

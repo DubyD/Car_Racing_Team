@@ -51,7 +51,9 @@ public class TurnTaker extends TimerTask implements ActionListener{
      * @param e The action event
      */
     @Override
-    public void actionPerformed(ActionEvent e){this.run();}
+    public void actionPerformed(ActionEvent e) {
+        this.run();
+    }
 
     /**
      * Initiates the movement in the program
@@ -109,98 +111,92 @@ public class TurnTaker extends TimerTask implements ActionListener{
         List<Car> oldRacers = new ArrayList<>(this.gotham.getRacers());
 
             //iterates through the list to move cars
-       for(Car next : oldRacers){
+        for(Car next : oldRacers){
 
                 //Skips finished racers
                 //and adds them to the new list
-           if(next.getFinished() == true){
+            if(next.getFinished() == true){
 
-               currentRacers.add(next);
-                    //Removes racer so it doesn't keep duplicating the finished racer
-               this.gotham.removeRacer(next);
-               continue;
-           }
+                currentRacers.add(next);
+                        //Removes racer so it doesn't keep duplicating the finished racer
+                this.gotham.removeRacer(next);
+                continue;
+            }
 
-                //Checks the speed of each vehicle
-                //if it is 0 it startMove, if it's
-                //>0 it will keepMove
-           if(next.getEngine().getSpeed() == 0){
+                    //Checks the speed of each vehicle
+                    //if it is 0 it startMove, if it's
+                    //>0 it will keepMove
+            if(next.getEngine().getSpeed() == 0){
 
-                    //initiates new Car to move
-               Car check = next.startMove();
+                        //initiates new Car to move
+                Car check = next.startMove();
 
-                    //if somehow finished immediately it stops
-                    //the car from moving
-               if(check.gotThere() == true){
-                   check.getEngine().stop();
-               }
-               currentRacers.add(check);
-               this.gotham.removeRacer(check.getPrev());
-
-
-           }else{
-
-                    //Used to store the checks before
-                    //the adding to the new Racers
-               List<Car> doubleCheck = new ArrayList<>();
-               for(int i = 0; i < next.getEngine().getSpeed(); i++) {
-
-                        //Checks to see if it is the first
-                        //or second time through the loop
-                   Car check;
-                   if(doubleCheck.isEmpty()) {
-                       check = next.keepMove();
-                   }else{
-                       check = doubleCheck.get(0).keepMove();
-                   }
+                        //if somehow finished immediately it stops
+                        //the car from moving
+                if(check.gotThere() == true){
+                    check.getEngine().stop();
+                }
+                currentRacers.add(check);
+                this.gotham.removeRacer(check.getPrev());
 
 
-                   //Checks to see if this is the first
-                        //instance in the forLoop to remove the
-                        //original Racer from the board and add
-                   if(check.getPrev() == next) {
+            }else{
 
-                       doubleCheck.add(check);
-                       this.gotham.removeRacer(check.getPrev());
+                        //Used to store the checks before
+                        //the adding to the new Racers
+                List<Car> doubleCheck = new ArrayList<>();
+                for(int i = 0; i < next.getEngine().getSpeed(); i++) {
 
-                        //If speed == 2 it will iterate through this loop
-                   }else if(doubleCheck.contains(check.getPrev())) {
-
-                       doubleCheck.remove(check.getPrev());
-                       doubleCheck.add(check);
-
-                   }
-
-                        //Checks if it hit the destination
-                   if(check.gotThere()){
-
-                       check.getEngine().stop();
-                            //Will help end the for loop
-                       i = i + 1;
-                   }
-               }
-
-               currentRacers.addAll(doubleCheck);
-
-           }
+                            //Checks to see if it is the first
+                            //or second time through the loop
+                    Car check;
+                    if(doubleCheck.isEmpty()) {
+                        check = next.keepMove();
+                    }else{
+                        check = doubleCheck.get(0).keepMove();
+                    }
 
 
+                    //Checks to see if this is the first
+                            //instance in the forLoop to remove the
+                            //original Racer from the board and add
+                    if(check.getPrev() == next) {
 
-       }
-            //This will be the new positions of the contestants
-        this.gotham.setRacers(currentRacers);
+                        doubleCheck.add(check);
+                        this.gotham.removeRacer(check.getPrev());
+
+                            //If speed == 2 it will iterate through this loop
+                    }else if(doubleCheck.contains(check.getPrev())) {
+
+                        doubleCheck.remove(check.getPrev());
+                        doubleCheck.add(check);
+
+                    }
+
+                            //Checks if it hit the destination
+                    if(check.gotThere()){
+
+                        check.getEngine().stop();
+                                //Will help end the for loop
+                        i = i + 1;
+                    }
+                }
+
+                currentRacers.addAll(doubleCheck);
+
+            }
+
+
+
+        }
+                //This will be the new positions of the contestants
+            this.gotham.setRacers(currentRacers);
     }
 
-    public City getGotham() {
-        return this.gotham;
-    }
+    //-------------------------------Setters-----------------------------------------------------
 
     public void setGotham(City gotham) {
         this.gotham = gotham;
-    }
-
-    public GameGrid getGuiUpdater() {
-        return this.guiUpdater;
     }
 
     public void setGuiUpdater(GameGrid guiUpdater) {
@@ -211,28 +207,38 @@ public class TurnTaker extends TimerTask implements ActionListener{
         return this.finished;
     }
 
-    public boolean getFinished() {
-        return this.finished;
-    }
-
     public void setFinished(boolean finished) {
         this.finished = finished;
-    }
-
-    public int getTurns(){
-        return this.turns;
     }
 
     public void setTurns(int turns) {
         this.turns = turns;
     }
 
+    public void setClock(Timer clock) {
+        this.clock = clock;
+    }
+
+    //-------------------------------Getters-------------------------------------------------
+
     public Timer getClock() {
         return this.clock;
     }
 
-    public void setClock(Timer clock) {
-        this.clock = clock;
+    public int getTurns(){
+        return this.turns;
+    }
+
+    public boolean getFinished() {
+        return this.finished;
+    }
+
+    public City getGotham() {
+        return this.gotham;
+    }
+
+    public GameGrid getGuiUpdater() {
+        return this.guiUpdater;
     }
 
         //To complete the class I added a toString method

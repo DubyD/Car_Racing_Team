@@ -3,9 +3,6 @@
 //GW fixed some bugs I found
 //EL fixed grammatical errors, added toString() method, and documentation
 
-import javax.swing.*;
-import java.net.URL;
-
 public class Steering {
 
     private char directionXY;

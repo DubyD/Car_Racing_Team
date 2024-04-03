@@ -1,6 +1,7 @@
 
 
 //Author VS
+//EL added setter and getter
 
 import javax.swing.*;
 import java.awt.*;
@@ -32,15 +33,23 @@ public class GameScreenGui extends JPanel {
         this.setVisible(true);
     }
 
-    public JButton getEndButton(){
-        return this.endGameButton;
-    }
-
     public GameScreenGui(){
         this.gameGrid = null;
         this.endGameButton = null;
     }
 
+
+    //-------------------------------Setters-----------------------------------------------------
+
+    public void setGameGrid(GameGrid gameGrid){
+        this.gameGrid = gameGrid;
+    }
+
+    public void setEndButton(JButton endGameButton){
+        this.endGameButton = endGameButton;
+    }
+
+    //-------------------------------Getters-----------------------------------------------------
 
     public City getGotham(){
         return this.gameGrid.getGotham();
@@ -48,6 +57,10 @@ public class GameScreenGui extends JPanel {
 
     public boolean getFinished(){
         return this.gameGrid.getFinished();
+    }
+
+    public JButton getEndButton(){
+        return this.endGameButton;
     }
 
         //Added to complete the class

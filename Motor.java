@@ -1,20 +1,18 @@
 
-
-
-
 //Author WD
+//EL added documentation and fixed grammatical errors
 
 import java.util.Random;
 
 public class Motor{
+    
     private int speed;
 
     public Motor(){
         this.speed = 0;
     }
 
-//-------------Setters-----------------------------------------------------
-
+    //-------------Setters-----------------------------------------------------
 
         //When moving the car may speed up
     public void setSpeed(){
@@ -40,21 +38,22 @@ public class Motor{
         }
     }
 
+    //-------------Getters-----------------------------------------------------
+
+        //Returns the speed of the Car
     public int getSpeed(){
         return this.speed;
     }
 
-        //Stops at each Destination
-    public void stop(){
-        this.speed = 0;
-    }
+    //------------------exotic-------------------------------------------------
 
-
-//------------------exotic-------------------------------------------------
-
-        //When moving fast the car may slowdown
+    /**
+     * This method is used to determine if the Car has friction
+     * @return boolean
+     */
     public boolean hasFriction(){
 
+        //When moving fast the car may slowdown
         Random randomizer = new Random();
         int randomInt = randomizer.nextInt(10) + 1;
 
@@ -65,6 +64,14 @@ public class Motor{
         return false;
     }
 
+    /**
+     * This method is used to reset the speed of the Car to 0
+     * @return void
+     */
+    public void stop(){
+        //Stops at each Destination
+        this.speed = 0;
+    }
 
         //Added this to complete this as a java class
     @Override
@@ -72,6 +79,4 @@ public class Motor{
         String reply = "This handles all of the speed functionality of the Car obj.";
         return reply;
     }
-
-
 }

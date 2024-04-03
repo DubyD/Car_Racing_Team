@@ -4,7 +4,7 @@
 
 //Author WD
 //Some bug fixes by AW (3-23)
-//EL fixed some grammatical errors
+//EL fixed grammatical errors and added documentation
 
 import java.util.*;
 
@@ -49,9 +49,14 @@ public class City {
     }
 
 //------------------------Methods used in Factory Methods----------------------------
-
-        //Used to see if the spot is available or not
-        //Used to tidy up more complex methods
+    
+    /**
+     * This method checks to see if the spot is available
+     * @param x int
+     * @param y int
+     * @param one GamePiece
+     * @return boolean
+     */
     private boolean validSpot(int x, int y, GamePiece one){
         if(x == one.getX()){
             if(y == one.getY()){
@@ -61,10 +66,15 @@ public class City {
         return true;
     }
 
-        //Loops through the Board components to see if this is a valid space
-        //Loops through all the components even if they haven't been added to this.board
+    /**
+     * This method checks to see if the spot is available
+     * @param x
+     * @param y
+     * @return boolean
+     */
     private boolean isFreeSpace(int x, int y){
-            //iterates through Destinations
+            //Loops through the Board components to see if this is a valid space
+            //Loops through all the components even if they haven't been added to this.board
         for(Destination next: this.stops){
             if(!validSpot(x,y, next)){
                 return false;
@@ -80,7 +90,11 @@ public class City {
         return true;
     }
 
-        //Creates a List of 4 Destinations in random locations
+    /**
+     * This method creates a list of 4 destinations in random locations
+     * @param dimension
+     * @return void
+     */
     private void makeDestinations(int dimension){
 
             //creates randomizer
@@ -109,8 +123,12 @@ public class City {
         }
     }//End of Destination Factory
 
-
-        //Adding Competitors on the board
+    /**
+     * This method adds competitors to the board
+     * @param dimension
+     * @param numOfCars
+     * @return void
+     */
     private void addCompetitors(int dimension, int numOfCars){
 
             //creates randomizer
@@ -138,7 +156,26 @@ public class City {
 
     }//End of Racer Factory
 
+    /**
+     * This method removes the last turns racer
+     * @param remove
+     * @return void
+     */
+    public void removeRacer(Car remove){
+        if(this.racers.contains(remove)){
+            this.racers.remove(remove);
+            this.board.remove(remove);
+        }
+    }
 
+    //-------------------------------Setters-----------------------------------------------------
+
+    //Adds the next turns racer locations
+    public void setRacers(List<Car> nextSpots){
+        this.racers.addAll(nextSpots);
+        this.board.addAll(nextSpots);
+    }
+    
         //Used to randomize particular racers check point order
     private void setDestinations(Car setting){
             //Creates a List without alternating the original list
@@ -149,46 +186,18 @@ public class City {
         setting.setDestination(shuffledList);
     }//End of Shuffling racers objectives
 
-
-
-
-//---------------------------Getters-------------------------------------------------------
-
-        //Checks to see if the race is over
-    public boolean getFinished(){
-        boolean isDone = true;
-        for(Car next: this.racers){
-            isDone = isDone && next.getFinished();
-        }
-        return isDone;
+    public void setBoard(List<GamePiece> board) {
+        this.board = board;
     }
 
-        //Give the ability to get List of Competitors
-    public List<Car> getRacers(){
-        return this.racers;
+    public void setStops(List<Destination> stops) {
+        this.stops = stops;
     }
 
-        //Removes last turns Racer
-    public void removeRacer(Car remove){
-        if(this.racers.contains(remove)){
-            this.racers.remove(remove);
-            this.board.remove(remove);
-        }
-    }
-        //Adds the next turns racer locations
-    public void setRacers(List<Car> nextSpots){
-        this.racers.addAll(nextSpots);
-        this.board.addAll(nextSpots);
-    }
-
-        //Exports all the GamePieces
-    public List<GamePiece> getBoard(){
-        return this.board;
-    }
+    //---------------------------Getters-------------------------------------------------------
 
         //Exports cars to iterate their results onto individual labels
     public String[] getResults(){
-
             //Components needed to help sort
             //from smallest to largest
         int x = 0;
@@ -227,6 +236,29 @@ public class City {
         }
 
         return reply;
+    }
+    
+    //Checks to see if the race is over
+    public boolean getFinished(){
+        boolean isDone = true;
+        for(Car next: this.racers){
+            isDone = isDone && next.getFinished();
+        }
+        return isDone;
+    }
+
+        //Give the ability to get List of Competitors
+    public List<Car> getRacers(){
+        return this.racers;
+    }
+
+    public List<Destination> getStops() {
+        return this.stops;
+    }
+
+        //Exports all the GamePieces
+    public List<GamePiece> getBoard(){
+        return this.board;
     }
 
         //toString() method to complete class
